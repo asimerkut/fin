@@ -11,7 +11,7 @@ import java.util.Set;
  */
 public interface DefPivotService {
 
-    Set<String> getFieldSet(String sql);
+    List<String> getFieldSet(String sql);
     PivotDataDTO getSqlData(String sql);
 
     /**

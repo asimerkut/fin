@@ -7,20 +7,20 @@ import java.util.Set;
 
 public class PivotDataDTO implements Serializable {
 
-	private List<Map<String, Object>> dataList;
-	private Set<String> fieldSet;
+    private List<Map<String, Object>> dataList;
+    private List<String> fieldList;
 
-	public PivotDataDTO(List<Map<String, Object>> dataList, Set<String> fieldSet){
-		this.dataList = dataList;
-		this.fieldSet = fieldSet;
-	}
+    public PivotDataDTO(List<Map<String, Object>> dataList, List<String> fieldList){
+        this.dataList = dataList;
+        this.fieldList = fieldList;
+    }
 
     public List<Map<String, Object>> getDataList() {
         return this.dataList;
     }
 
-    public Set<String> getFieldSet() {
-        return this.fieldSet;
+    public List<String> getFieldList() {
+        return this.fieldList;
     }
 
 }

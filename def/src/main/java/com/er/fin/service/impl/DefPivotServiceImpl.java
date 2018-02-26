@@ -43,17 +43,16 @@ public class DefPivotServiceImpl implements DefPivotService {
     }
 
     @Override
-    public Set<String> getFieldSet(String sql) {
-        Set<String> columnSet = new TreeSet<String>();
+    public List<String> getFieldSet(String sql) {
         PivotDataDTO data = getSqlData("select * from ("+sql+") where 1=2");
-        return data.getFieldSet();
+        return data.getFieldList();
     }
 
     @Override
     public PivotDataDTO getSqlData(String sql) {
         Statement statement = null;
         ResultSet resultSet = null;
-        Set<String> columnSet = new TreeSet<String>();
+        List<String> columnList = new ArrayList<>();
         List<Map<String, Object>> listMap = new ArrayList<Map<String, Object>>();
         try {
             Session sess = em.unwrap(Session.class);
@@ -68,21 +67,21 @@ public class DefPivotServiceImpl implements DefPivotService {
             int columnCount = metaData.getColumnCount();
             for (int columnIndex = 1; columnIndex <= columnCount; ++columnIndex) {
                 String columnName = metaData.getColumnLabel(columnIndex);
-                columnSet.add(columnName);
+                columnList.add(columnName);
             }
             while (resultSet.next()) {
-                Map<String, Object> row = new HashMap<String, Object>();
-                for (String columnName : columnSet) {
+                Map<String, Object> row = new LinkedHashMap<>();
+                for (String columnName : columnList) {
                     Object obj = resultSet.getObject(columnName);
-                    row.put(columnName.toUpperCase(), obj);
+                    row.put(columnName, obj);
                 }
                 listMap.add(row);
             }
-            return new PivotDataDTO(listMap, columnSet);
+            return new PivotDataDTO(listMap, columnList);
         } catch (Exception e) {
             System.out.println("PivotSQL:"+sql);
             //logger.error(e,e);
-            return new PivotDataDTO(listMap, columnSet);
+            return new PivotDataDTO(listMap, columnList);
         } finally {
             try {
                 resultSet.close();
