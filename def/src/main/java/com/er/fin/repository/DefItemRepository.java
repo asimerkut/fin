@@ -1,9 +1,13 @@
 package com.er.fin.repository;
 
 import com.er.fin.domain.DefItem;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import org.springframework.data.jpa.repository.*;
+
+import java.util.List;
 
 
 /**
@@ -12,5 +16,7 @@ import org.springframework.data.jpa.repository.*;
 @SuppressWarnings("unused")
 @Repository
 public interface DefItemRepository extends JpaRepository<DefItem, Long> {
+
+    List<DefItem> findAllByTypeIdOrderByCode(Long typeId);
 
 }

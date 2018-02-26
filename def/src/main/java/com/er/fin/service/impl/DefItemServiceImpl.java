@@ -4,8 +4,11 @@ import com.er.fin.service.DefItemService;
 import com.er.fin.domain.DefItem;
 import com.er.fin.repository.DefItemRepository;
 import com.er.fin.repository.search.DefItemSearchRepository;
+import com.er.fin.service.dto.ComboSelDTO;
+import com.er.fin.service.dto.FinUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -26,9 +29,9 @@ public class DefItemServiceImpl implements DefItemService {
 
     private final DefItemRepository defItemRepository;
 
-    private final DefItemSearchRepository defItemSearchRepository;
+    private final DefItemRepository defItemSearchRepository;
 
-    public DefItemServiceImpl(DefItemRepository defItemRepository, DefItemSearchRepository defItemSearchRepository) {
+    public DefItemServiceImpl(DefItemRepository defItemRepository, DefItemRepository defItemSearchRepository) {
         this.defItemRepository = defItemRepository;
         this.defItemSearchRepository = defItemSearchRepository;
     }
@@ -93,9 +96,15 @@ public class DefItemServiceImpl implements DefItemService {
     @Override
     @Transactional(readOnly = true)
     public List<DefItem> search(String query) {
-        log.debug("Request to search DefItems for query {}", query);
-        return StreamSupport
-            .stream(defItemSearchRepository.search(queryStringQuery(query)).spliterator(), false)
-            .collect(Collectors.toList());
+        log.debug("Request to search for a page of DefItems for query {}", query);
+        //pageable = FinUtil.getPageParam();
+        List<DefItem> result = null;
+        ComboSelDTO obj = FinUtil.getComboSelDTO(query);
+        if (obj!=null){
+            result = defItemSearchRepository.findAllByTypeIdOrderByCode(obj.getSelId());
+        } else {
+            result = defItemSearchRepository.findAll();
+        }
+        return result;
     }
 }
