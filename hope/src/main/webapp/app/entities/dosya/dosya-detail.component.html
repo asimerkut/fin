@@ -1,0 +1,42 @@
+
+<div *ngIf="dosya">
+    <h2><span>Dosya</span> {{dosya.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{dosya.kod}}</span>
+        </dd>
+        <dt><span>Dosya No</span></dt>
+        <dd>
+            <span>{{dosya.dosyaNo}}</span>
+        </dd>
+        <dt><span>Klasor</span></dt>
+        <dd>
+            <div *ngIf="dosya.klasor">
+                <a [routerLink]="['/dosya', dosya.klasor?.id]">{{dosya.klasor?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Dosya Tipi</span></dt>
+        <dd>
+            <div *ngIf="dosya.dosyaTipi">
+                <a [routerLink]="['/dosya-tipi', dosya.dosyaTipi?.id]">{{dosya.dosyaTipi?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'dosya/'+ dosya.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DosyaBorcKalem.
+    -->
+    <changeSet id="20180213085303-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dosya_borc_id"
+                                 baseTableName="dosya_borc_kalem"
+                                 constraintName="fk_dosya_borc_kalem_dosya_borc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dosya_borc"/>
+
+        <addForeignKeyConstraint baseColumnNames="borc_kalem_id"
+                                 baseTableName="dosya_borc_kalem"
+                                 constraintName="fk_dosya_borc_kalem_borc_kalem_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="borc_kalem"/>
+
+        <addForeignKeyConstraint baseColumnNames="borc_id"
+                                 baseTableName="dosya_borc_kalem"
+                                 constraintName="fk_dosya_borc_kalem_borc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="borc"/>
+
+        <addForeignKeyConstraint baseColumnNames="masraf_id"
+                                 baseTableName="dosya_borc_kalem"
+                                 constraintName="fk_dosya_borc_kalem_masraf_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="masraf"/>
+
+    </changeSet>
+</databaseChangeLog>

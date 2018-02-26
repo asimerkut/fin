@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FinansalHareketDetay.
+    -->
+    <changeSet id="20180213085305-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="finansal_hareket_id"
+                                 baseTableName="finansal_hareket_detay"
+                                 constraintName="fk_finansal_hareket_detay_finansal_hareket_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="finansal_hareket"/>
+
+        <addForeignKeyConstraint baseColumnNames="dosya_borc_id"
+                                 baseTableName="finansal_hareket_detay"
+                                 constraintName="fk_finansal_hareket_detay_dosya_borc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dosya_borc"/>
+
+        <addForeignKeyConstraint baseColumnNames="dosya_borc_kalem_id"
+                                 baseTableName="finansal_hareket_detay"
+                                 constraintName="fk_finansal_hareket_detay_dosya_borc_kalem_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dosya_borc_kalem"/>
+
+        <addForeignKeyConstraint baseColumnNames="karsi_fhd_id"
+                                 baseTableName="finansal_hareket_detay"
+                                 constraintName="fk_finansal_hareket_detay_karsi_fhd_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="finansal_hareket_detay"/>
+
+        <addForeignKeyConstraint baseColumnNames="ilgi_fhd_id"
+                                 baseTableName="finansal_hareket_detay"
+                                 constraintName="fk_finansal_hareket_detay_ilgi_fhd_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="finansal_hareket_detay"/>
+
+    </changeSet>
+</databaseChangeLog>

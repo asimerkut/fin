@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180213085254",
+    "entityTableName": "borc_tipi",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

@@ -1,0 +1,63 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myDosyaBorcKalemLabel">Create or edit a Dosya Borc Kalem</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!dosyaBorcKalem.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="dosyaBorcKalem.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="dosyaBorcKalem.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_orjinalBorcTutari">Orjinal Borc Tutari</label>
+            <input type="number" class="form-control" name="orjinalBorcTutari" id="field_orjinalBorcTutari"
+                [(ngModel)]="dosyaBorcKalem.orjinalBorcTutari" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosyaBorc">Dosya Borc</label>
+            <select class="form-control" id="field_dosyaBorc" name="dosyaBorc" [(ngModel)]="dosyaBorcKalem.dosyaBorc" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="dosyaBorcOption.id === dosyaBorcKalem.dosyaBorc?.id ? dosyaBorcKalem.dosyaBorc : dosyaBorcOption" *ngFor="let dosyaBorcOption of dosyaborcs; trackBy: trackDosyaBorcById">{{dosyaBorcOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_borcKalem">Borc Kalem</label>
+            <select class="form-control" id="field_borcKalem" name="borcKalem" [(ngModel)]="dosyaBorcKalem.borcKalem" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="borcKalemOption.id === dosyaBorcKalem.borcKalem?.id ? dosyaBorcKalem.borcKalem : borcKalemOption" *ngFor="let borcKalemOption of borckalems; trackBy: trackBorcKalemById">{{borcKalemOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_borc">Borc</label>
+            <select class="form-control" id="field_borc" name="borc" [(ngModel)]="dosyaBorcKalem.borc" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="borcOption.id === dosyaBorcKalem.borc?.id ? dosyaBorcKalem.borc : borcOption" *ngFor="let borcOption of borcs; trackBy: trackBorcById">{{borcOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_masraf">Masraf</label>
+            <select class="form-control" id="field_masraf" name="masraf" [(ngModel)]="dosyaBorcKalem.masraf" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="masrafOption.id === dosyaBorcKalem.masraf?.id ? dosyaBorcKalem.masraf : masrafOption" *ngFor="let masrafOption of masrafs; trackBy: trackMasrafById">{{masrafOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

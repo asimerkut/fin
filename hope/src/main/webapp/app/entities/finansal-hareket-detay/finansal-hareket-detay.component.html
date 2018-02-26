@@ -1,0 +1,104 @@
+<div>
+    <h2>
+        <span>Finansal Hareket Detays</span>
+        <button class="btn btn-primary float-right jh-create-entity create-finansal-hareket-detay" [routerLink]="['/', { outlets: { popup: ['finansal-hareket-detay-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Finansal Hareket Detay
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="form-group">
+        <label class="form-control-label" for="field_dosya">Dosya</label>
+        <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="comboSelModel.comboSel" (change)="onChange($event)">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="selectedOption" *ngFor="let selectedOption of comboSelModel.comboList; trackBy: trackDosyaById">{{selectedOption.kod}}</option>
+        </select>
+    </div>
+
+    <br/>
+    <div class="table-responsive" *ngIf="finansalHareketDetays">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="kod"><span>Kod</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="islemTutari"><span>Islem Tutari</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="hesapYonu"><span>Hesap Yonu</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="hesapId"><span>Hesap Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="karsiHesapId"><span>Karsi Hesap Id</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="finansalHareket.kod"><span>Finansal Hareket</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dosyaBorc.kod"><span>Dosya Borc</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dosyaBorcKalem.kod"><span>Dosya Borc Kalem</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="karsiFhd.kod"><span>Karsi Fhd</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let finansalHareketDetay of finansalHareketDetays ;trackBy: trackId">
+                <td><a [routerLink]="['../finansal-hareket-detay', finansalHareketDetay.id ]">{{finansalHareketDetay.id}}</a></td>
+                <td>{{finansalHareketDetay.kod}}</td>
+                <td>{{finansalHareketDetay.islemTutari}}</td>
+                <td>{{finansalHareketDetay.hesapYonu}}</td>
+                <td>{{finansalHareketDetay.hesapId}}</td>
+                <td>{{finansalHareketDetay.karsiHesapId}}</td>
+                <td>
+                    <div *ngIf="finansalHareketDetay.finansalHareket">
+                        <a [routerLink]="['../finansal-hareket', finansalHareketDetay.finansalHareket?.id ]" >{{finansalHareketDetay.finansalHareket?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finansalHareketDetay.dosyaBorc">
+                        <a [routerLink]="['../dosya-borc', finansalHareketDetay.dosyaBorc?.id ]" >{{finansalHareketDetay.dosyaBorc?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finansalHareketDetay.dosyaBorcKalem">
+                        <a [routerLink]="['../dosya-borc-kalem', finansalHareketDetay.dosyaBorcKalem?.id ]" >{{finansalHareketDetay.dosyaBorcKalem?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="finansalHareketDetay.karsiFhd">
+                        <a [routerLink]="['../finansal-hareket-detay', finansalHareketDetay.karsiFhd?.id ]" >{{finansalHareketDetay.karsiFhd?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../finansal-hareket-detay', finansalHareketDetay.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'finansal-hareket-detay/'+ finansalHareketDetay.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'finansal-hareket-detay/'+ finansalHareketDetay.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="finansalHareketDetays && finansalHareketDetays.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

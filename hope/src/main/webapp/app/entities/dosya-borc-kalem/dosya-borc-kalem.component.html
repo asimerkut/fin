@@ -1,0 +1,98 @@
+<div>
+    <h2>
+        <span>Dosya Borc Kalems</span>
+        <button class="btn btn-primary float-right jh-create-entity create-dosya-borc-kalem" [routerLink]="['/', { outlets: { popup: ['dosya-borc-kalem-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Dosya Borc Kalem
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="form-group">
+        <label class="form-control-label" for="field_dosya">Dosya</label>
+        <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="comboSelModel.comboSel" (change)="onChange($event)">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="selectedOption" *ngFor="let selectedOption of comboSelModel.comboList; trackBy: trackDosyaById">{{selectedOption.kod}}</option>
+        </select>
+    </div>
+
+    <br/>
+    <div class="table-responsive" *ngIf="dosyaBorcKalems">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="kod"><span>Kod</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="orjinalBorcTutari"><span>Orjinal Borc Tutari</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dosyaBorc.kod"><span>Dosya Borc</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="borcKalem.kod"><span>Borc Kalem</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="borc.kod"><span>Borc</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="masraf.kod"><span>Masraf</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dosyaBorcKalem of dosyaBorcKalems ;trackBy: trackId">
+                <td><a [routerLink]="['../dosya-borc-kalem', dosyaBorcKalem.id ]">{{dosyaBorcKalem.id}}</a></td>
+                <td>{{dosyaBorcKalem.kod}}</td>
+                <td>{{dosyaBorcKalem.orjinalBorcTutari}}</td>
+                <td>
+                    <div *ngIf="dosyaBorcKalem.dosyaBorc">
+                        <a [routerLink]="['../dosya-borc', dosyaBorcKalem.dosyaBorc?.id ]" >{{dosyaBorcKalem.dosyaBorc?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dosyaBorcKalem.borcKalem">
+                        <a [routerLink]="['../borc-kalem', dosyaBorcKalem.borcKalem?.id ]" >{{dosyaBorcKalem.borcKalem?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dosyaBorcKalem.borc">
+                        <a [routerLink]="['../borc', dosyaBorcKalem.borc?.id ]" >{{dosyaBorcKalem.borc?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dosyaBorcKalem.masraf">
+                        <a [routerLink]="['../masraf', dosyaBorcKalem.masraf?.id ]" >{{dosyaBorcKalem.masraf?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../dosya-borc-kalem', dosyaBorcKalem.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dosya-borc-kalem/'+ dosyaBorcKalem.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dosya-borc-kalem/'+ dosyaBorcKalem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="dosyaBorcKalems && dosyaBorcKalems.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

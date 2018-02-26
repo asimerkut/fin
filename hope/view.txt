@@ -1,0 +1,15 @@
+
+select faiz_hesapla(dbk.faiz_tipi_id ,       --prm_faiz_tipi_id      :
+                    dbk.faize_esas_tarih,    --prm_baslangic_tarihi  : varsa fhd den al
+                    sysdate,                 -- prm_bitis_tarihi     :
+                    dbk.orjinal_borc_tutari, --prm_tutar             : fhd den bakiye al
+                    db.dosya_id,             --prm_dosya_id          :
+                    d.sirket_id,             --prm_sirket_id         :
+                    dbk.sabit_faiz_orani,    --prm_sabit_faiz_orani  :
+                    dbk.faiz_orani_peryodu_id--prm_faiz_oran_peryodu :
+                  ) faiz
+from dosya_borc_kalem dbk
+inner join dosya_borc db on db.id = dbk.dosya_borc_id
+inner join dosya d on d.id = db.dosya_id
+where dbk.faiz_tipi_id is not null
+

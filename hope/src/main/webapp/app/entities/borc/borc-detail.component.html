@@ -1,0 +1,42 @@
+
+<div *ngIf="borc">
+    <h2><span>Borc</span> {{borc.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{borc.kod}}</span>
+        </dd>
+        <dt><span>Orjinal Borc Tutari</span></dt>
+        <dd>
+            <span>{{borc.orjinalBorcTutari}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="borc.dosya">
+                <a [routerLink]="['/dosya', borc.dosya?.id]">{{borc.dosya?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Borc Tipi</span></dt>
+        <dd>
+            <div *ngIf="borc.borcTipi">
+                <a [routerLink]="['/borc-tipi', borc.borcTipi?.id]">{{borc.borcTipi?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'borc/'+ borc.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

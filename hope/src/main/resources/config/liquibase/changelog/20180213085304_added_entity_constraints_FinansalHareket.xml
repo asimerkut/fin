@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity FinansalHareket.
+    -->
+    <changeSet id="20180213085304-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dosya_id"
+                                 baseTableName="finansal_hareket"
+                                 constraintName="fk_finansal_hareket_dosya_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dosya"/>
+
+        <addForeignKeyConstraint baseColumnNames="islem_kodu_id"
+                                 baseTableName="finansal_hareket"
+                                 constraintName="fk_finansal_hareket_islem_kodu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="islem_kodu"/>
+
+        <addForeignKeyConstraint baseColumnNames="klasor_fh_id"
+                                 baseTableName="finansal_hareket"
+                                 constraintName="fk_finansal_hareket_klasor_fh_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="finansal_hareket"/>
+
+        <addForeignKeyConstraint baseColumnNames="finansal_hareket_id"
+                                 baseTableName="finansal_hareket"
+                                 constraintName="fk_finansal_hareket_finansal_hareket_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="finansal_hareket"/>
+
+    </changeSet>
+</databaseChangeLog>

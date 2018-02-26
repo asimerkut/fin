@@ -1,0 +1,62 @@
+
+<div *ngIf="finansalHareket">
+    <h2><span>Finansal Hareket</span> {{finansalHareket.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{finansalHareket.kod}}</span>
+        </dd>
+        <dt><span>Islem Kabul Tarihi</span></dt>
+        <dd>
+            <span>{{finansalHareket.islemKabulTarihi | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Islem Tutari</span></dt>
+        <dd>
+            <span>{{finansalHareket.islemTutari}}</span>
+        </dd>
+        <dt><span>Aciklama</span></dt>
+        <dd>
+            <span>{{finansalHareket.aciklama}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="finansalHareket.dosya">
+                <a [routerLink]="['/dosya', finansalHareket.dosya?.id]">{{finansalHareket.dosya?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Islem Kodu</span></dt>
+        <dd>
+            <div *ngIf="finansalHareket.islemKodu">
+                <a [routerLink]="['/islem-kodu', finansalHareket.islemKodu?.id]">{{finansalHareket.islemKodu?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Klasor Fh</span></dt>
+        <dd>
+            <div *ngIf="finansalHareket.klasorFh">
+                <a [routerLink]="['/finansal-hareket', finansalHareket.klasorFh?.id]">{{finansalHareket.klasorFh?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Finansal Hareket</span></dt>
+        <dd>
+            <div *ngIf="finansalHareket.finansalHareket">
+                <a [routerLink]="['/finansal-hareket', finansalHareket.finansalHareket?.id]">{{finansalHareket.finansalHareket?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'finansal-hareket/'+ finansalHareket.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

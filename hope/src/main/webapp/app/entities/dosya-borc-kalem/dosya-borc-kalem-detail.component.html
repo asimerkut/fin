@@ -1,0 +1,54 @@
+
+<div *ngIf="dosyaBorcKalem">
+    <h2><span>Dosya Borc Kalem</span> {{dosyaBorcKalem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{dosyaBorcKalem.kod}}</span>
+        </dd>
+        <dt><span>Orjinal Borc Tutari</span></dt>
+        <dd>
+            <span>{{dosyaBorcKalem.orjinalBorcTutari}}</span>
+        </dd>
+        <dt><span>Dosya Borc</span></dt>
+        <dd>
+            <div *ngIf="dosyaBorcKalem.dosyaBorc">
+                <a [routerLink]="['/dosya-borc', dosyaBorcKalem.dosyaBorc?.id]">{{dosyaBorcKalem.dosyaBorc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Borc Kalem</span></dt>
+        <dd>
+            <div *ngIf="dosyaBorcKalem.borcKalem">
+                <a [routerLink]="['/borc-kalem', dosyaBorcKalem.borcKalem?.id]">{{dosyaBorcKalem.borcKalem?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Borc</span></dt>
+        <dd>
+            <div *ngIf="dosyaBorcKalem.borc">
+                <a [routerLink]="['/borc', dosyaBorcKalem.borc?.id]">{{dosyaBorcKalem.borc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Masraf</span></dt>
+        <dd>
+            <div *ngIf="dosyaBorcKalem.masraf">
+                <a [routerLink]="['/masraf', dosyaBorcKalem.masraf?.id]">{{dosyaBorcKalem.masraf?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'dosya-borc-kalem/'+ dosyaBorcKalem.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

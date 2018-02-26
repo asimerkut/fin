@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "dosya",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "borcGrubu",
+            "otherEntityName": "borcGrubu",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180213085302",
+    "entityTableName": "dosya_borc",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

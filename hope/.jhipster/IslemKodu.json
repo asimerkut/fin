@@ -1,0 +1,16 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20180213085258",
+    "entityTableName": "islem_kodu",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

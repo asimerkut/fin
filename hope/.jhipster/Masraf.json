@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "dosya",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "masrafTipi",
+            "otherEntityName": "masrafTipi",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "masrafTarihi",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "orjinalMasrafTutari",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180213085301",
+    "entityTableName": "masraf",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

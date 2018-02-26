@@ -1,0 +1,66 @@
+
+<div *ngIf="finansalHareketDetay">
+    <h2><span>Finansal Hareket Detay</span> {{finansalHareketDetay.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{finansalHareketDetay.kod}}</span>
+        </dd>
+        <dt><span>Islem Tutari</span></dt>
+        <dd>
+            <span>{{finansalHareketDetay.islemTutari}}</span>
+        </dd>
+        <dt><span>Hesap Yonu</span></dt>
+        <dd>
+            <span>{{finansalHareketDetay.hesapYonu}}</span>
+        </dd>
+        <dt><span>Hesap Id</span></dt>
+        <dd>
+            <span>{{finansalHareketDetay.hesapId}}</span>
+        </dd>
+        <dt><span>Karsi Hesap Id</span></dt>
+        <dd>
+            <span>{{finansalHareketDetay.karsiHesapId}}</span>
+        </dd>
+        <dt><span>Finansal Hareket</span></dt>
+        <dd>
+            <div *ngIf="finansalHareketDetay.finansalHareket">
+                <a [routerLink]="['/finansal-hareket', finansalHareketDetay.finansalHareket?.id]">{{finansalHareketDetay.finansalHareket?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Dosya Borc</span></dt>
+        <dd>
+            <div *ngIf="finansalHareketDetay.dosyaBorc">
+                <a [routerLink]="['/dosya-borc', finansalHareketDetay.dosyaBorc?.id]">{{finansalHareketDetay.dosyaBorc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Dosya Borc Kalem</span></dt>
+        <dd>
+            <div *ngIf="finansalHareketDetay.dosyaBorcKalem">
+                <a [routerLink]="['/dosya-borc-kalem', finansalHareketDetay.dosyaBorcKalem?.id]">{{finansalHareketDetay.dosyaBorcKalem?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Karsi Fhd</span></dt>
+        <dd>
+            <div *ngIf="finansalHareketDetay.karsiFhd">
+                <a [routerLink]="['/finansal-hareket-detay', finansalHareketDetay.karsiFhd?.id]">{{finansalHareketDetay.karsiFhd?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'finansal-hareket-detay/'+ finansalHareketDetay.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

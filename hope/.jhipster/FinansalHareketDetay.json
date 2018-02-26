@@ -1,0 +1,65 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "finansalHareket",
+            "otherEntityName": "finansalHareket",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosyaBorc",
+            "otherEntityName": "dosyaBorc",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosyaBorcKalem",
+            "otherEntityName": "dosyaBorcKalem",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "karsiFhd",
+            "otherEntityName": "finansalHareketDetay",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "ilgiFhd",
+            "otherEntityName": "finansalHareketDetay",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "islemTutari",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "hesapYonu",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "hesapId",
+            "fieldType": "HesapEnum",
+            "fieldValues": "DB,DB_10,GL,GL_10,GL_20,GL_30,FE,FE_10,TH,TH_10,TH_20,IT,IT_10,ZZ,ZZ_10"
+        },
+        {
+            "fieldName": "karsiHesapId",
+            "fieldType": "HesapEnum",
+            "fieldValues": "DB,DB_10,GL,GL_10,GL_20,GL_30,FE,FE_10,TH,TH_10,TH_20,IT,IT_10,ZZ,ZZ_10"
+        }
+    ],
+    "changelogDate": "20180213085305",
+    "entityTableName": "finansal_hareket_detay",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

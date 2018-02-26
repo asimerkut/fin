@@ -1,0 +1,85 @@
+<div>
+    <h2>
+        <span>Dosya Borc Listesi</span>
+        <button class="btn btn-primary float-right jh-create-entity create-dosya-borc" [routerLink]="['/', { outlets: { popup: ['dosya-borc-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Dosya Borc
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+
+    <div class="form-group">
+        <label class="form-control-label" for="field_dosya">Dosya</label>
+        <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="comboSelModel.comboSel" (change)="onChange($event)">
+            <option [ngValue]="null"></option>
+            <option [ngValue]="selectedOption" *ngFor="let selectedOption of comboSelModel.comboList; trackBy: trackDosyaById">{{selectedOption.kod}}</option>
+        </select>
+    </div>
+
+    <br/>
+    <div class="table-responsive" *ngIf="dosyaBorcs">
+        <table class="table table-striped">
+            <thead>
+            <tr jhiSort [(predicate)]="predicate" [(ascending)]="reverse" [callback]="transition.bind(this)">
+            <th jhiSortBy="id"><span>ID</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="kod"><span>Kod</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="dosya.kod"><span>Dosya</span> <span class="fa fa-sort"></span></th>
+            <th jhiSortBy="borcGrubu.kod"><span>Borc Grubu</span> <span class="fa fa-sort"></span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let dosyaBorc of dosyaBorcs ;trackBy: trackId">
+                <td><a [routerLink]="['../dosya-borc', dosyaBorc.id ]">{{dosyaBorc.id}}</a></td>
+                <td>{{dosyaBorc.kod}}</td>
+                <td>
+                    <div *ngIf="dosyaBorc.dosya">
+                        <a [routerLink]="['../dosya', dosyaBorc.dosya?.id ]" >{{dosyaBorc.dosya?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="dosyaBorc.borcGrubu">
+                        <a [routerLink]="['../borc-grubu', dosyaBorc.borcGrubu?.id ]" >{{dosyaBorc.borcGrubu?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../dosya-borc', dosyaBorc.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dosya-borc/'+ dosyaBorc.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'dosya-borc/'+ dosyaBorc.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+    <div *ngIf="dosyaBorcs && dosyaBorcs.length">
+        <div class="row justify-content-center">
+            <jhi-item-count [page]="page" [total]="queryCount" [maxSize]="5" [itemsPerPage]="itemsPerPage"></jhi-item-count>
+        </div>
+        <div class="row justify-content-center">
+            <ngb-pagination [collectionSize]="totalItems" [(page)]="page" [pageSize]="itemsPerPage" [maxSize]="5" [rotate]="true" [boundaryLinks]="true" (pageChange)="loadPage(page)"></ngb-pagination>
+        </div>
+    </div>
+</div>

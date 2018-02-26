@@ -1,0 +1,45 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosyaBorc",
+            "otherEntityName": "dosyaBorc",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "borcKalem",
+            "otherEntityName": "borcKalem",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "borc",
+            "otherEntityName": "borc",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "masraf",
+            "otherEntityName": "masraf",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "orjinalBorcTutari",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180213085303",
+    "entityTableName": "dosya_borc_kalem",
+    "dto": "no",
+    "pagination": "pagination",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false
+}

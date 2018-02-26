@@ -1,0 +1,46 @@
+
+<div *ngIf="masraf">
+    <h2><span>Masraf</span> {{masraf.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{masraf.kod}}</span>
+        </dd>
+        <dt><span>Masraf Tarihi</span></dt>
+        <dd>
+            <span>{{masraf.masrafTarihi | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Orjinal Masraf Tutari</span></dt>
+        <dd>
+            <span>{{masraf.orjinalMasrafTutari}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="masraf.dosya">
+                <a [routerLink]="['/dosya', masraf.dosya?.id]">{{masraf.dosya?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Masraf Tipi</span></dt>
+        <dd>
+            <div *ngIf="masraf.masrafTipi">
+                <a [routerLink]="['/masraf-tipi', masraf.masrafTipi?.id]">{{masraf.masrafTipi?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'masraf/'+ masraf.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

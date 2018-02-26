@@ -1,0 +1,114 @@
+entity DosyaTipi {
+	kod String
+}
+
+entity BorcTipi {
+	kod String
+}
+
+entity MasrafTipi {
+	kod String
+}
+
+entity BorcGrubu {
+	kod String
+}
+
+entity BorcKalem {
+	kod String
+}
+
+entity IslemKodu {
+	kod String
+}
+
+entity Dosya {
+    kod String,
+    dosyaNo String
+}
+
+entity Borc {
+	kod String,
+    orjinalBorcTutari BigDecimal
+}
+
+entity Masraf {
+	kod String,
+    masrafTarihi LocalDate,
+    orjinalMasrafTutari BigDecimal
+}
+
+entity DosyaBorc {
+	kod String
+}
+
+entity DosyaBorcKalem {
+    kod String,
+    orjinalBorcTutari BigDecimal
+}
+
+entity FinansalHareket {
+	kod String,
+	islemKabulTarihi LocalDate,
+    islemTutari BigDecimal,
+    aciklama String
+}
+
+entity FinansalHareketDetay {
+	kod String,
+    islemTutari BigDecimal,
+    hesapYonu Long,
+    hesapId HesapEnum,
+    karsiHesapId HesapEnum
+}
+
+enum HesapEnum {
+    DB,
+    DB_10,
+    GL,
+    GL_10,
+    GL_20,
+    GL_30,
+    FE,
+    FE_10,
+    TH,
+    TH_10,
+    TH_20,
+    IT,
+    IT_10,
+    ZZ,
+    ZZ_10
+}
+
+relationship ManyToOne {
+	Dosya{klasor(kod)} to Dosya,
+    Dosya{dosyaTipi(kod)} to DosyaTipi,
+
+    Borc{dosya(kod)} to Dosya,
+    Borc{borcTipi(kod)} to BorcTipi,
+
+    Masraf{dosya(kod)} to Dosya,
+    Masraf{masrafTipi(kod)} to MasrafTipi,
+
+    DosyaBorc{dosya(kod)} to Dosya,
+    DosyaBorc{borcGrubu(kod)} to BorcGrubu,
+
+    DosyaBorcKalem{dosyaBorc(kod)} to DosyaBorc,
+    DosyaBorcKalem{borcKalem(kod)} to BorcKalem,
+	DosyaBorcKalem{borc(kod)} to Borc,
+    DosyaBorcKalem{masraf(kod)} to Masraf,
+
+    FinansalHareket{dosya(kod)} to Dosya,
+    FinansalHareket{islemKodu(kod)} to IslemKodu,
+    FinansalHareket{klasorFh(kod)} to FinansalHareket,
+    FinansalHareket{finansalHareket(kod)} to FinansalHareket,
+
+    FinansalHareketDetay{finansalHareket(kod)} to FinansalHareket,
+    FinansalHareketDetay{dosyaBorc(kod)} to DosyaBorc,
+    FinansalHareketDetay{dosyaBorcKalem(kod)} to DosyaBorcKalem,
+    FinansalHareketDetay{karsiFhd(kod)} to FinansalHareketDetay,
+
+}
+
+service all with serviceImpl
+paginate all with pagination

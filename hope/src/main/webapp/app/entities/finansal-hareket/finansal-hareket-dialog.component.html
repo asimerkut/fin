@@ -1,0 +1,78 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myFinansalHareketLabel">Create or edit a Finansal Hareket</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!finansalHareket.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="finansalHareket.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="finansalHareket.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_islemKabulTarihi">Islem Kabul Tarihi</label>
+            <div class="input-group">
+                <input id="field_islemKabulTarihi" type="text" class="form-control" name="islemKabulTarihi" ngbDatepicker  #islemKabulTarihiDp="ngbDatepicker" [(ngModel)]="finansalHareket.islemKabulTarihi"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="islemKabulTarihiDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_islemTutari">Islem Tutari</label>
+            <input type="number" class="form-control" name="islemTutari" id="field_islemTutari"
+                [(ngModel)]="finansalHareket.islemTutari" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_aciklama">Aciklama</label>
+            <input type="text" class="form-control" name="aciklama" id="field_aciklama"
+                [(ngModel)]="finansalHareket.aciklama" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosya">Dosya</label>
+            <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="finansalHareket.dosya" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="dosyaOption.id === finansalHareket.dosya?.id ? finansalHareket.dosya : dosyaOption" *ngFor="let dosyaOption of dosyas; trackBy: trackDosyaById">{{dosyaOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_islemKodu">Islem Kodu</label>
+            <select class="form-control" id="field_islemKodu" name="islemKodu" [(ngModel)]="finansalHareket.islemKodu" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="islemKoduOption.id === finansalHareket.islemKodu?.id ? finansalHareket.islemKodu : islemKoduOption" *ngFor="let islemKoduOption of islemkodus; trackBy: trackIslemKoduById">{{islemKoduOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_klasorFh">Klasor Fh</label>
+            <select class="form-control" id="field_klasorFh" name="klasorFh" [(ngModel)]="finansalHareket.klasorFh" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="finansalHareketOption.id === finansalHareket.klasorFh?.id ? finansalHareket.klasorFh : finansalHareketOption" *ngFor="let finansalHareketOption of finansalharekets; trackBy: trackFinansalHareketById">{{finansalHareketOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_finansalHareket">Finansal Hareket</label>
+            <select class="form-control" id="field_finansalHareket" name="finansalHareket" [(ngModel)]="finansalHareket.finansalHareket" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="finansalHareketOption.id === finansalHareket.finansalHareket?.id ? finansalHareket.finansalHareket : finansalHareketOption" *ngFor="let finansalHareketOption of finansalharekets; trackBy: trackFinansalHareketById">{{finansalHareketOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

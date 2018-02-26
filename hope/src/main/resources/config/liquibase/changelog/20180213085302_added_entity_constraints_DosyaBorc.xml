@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DosyaBorc.
+    -->
+    <changeSet id="20180213085302-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="dosya_id"
+                                 baseTableName="dosya_borc"
+                                 constraintName="fk_dosya_borc_dosya_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="dosya"/>
+
+        <addForeignKeyConstraint baseColumnNames="borc_grubu_id"
+                                 baseTableName="dosya_borc"
+                                 constraintName="fk_dosya_borc_borc_grubu_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="borc_grubu"/>
+
+    </changeSet>
+</databaseChangeLog>
