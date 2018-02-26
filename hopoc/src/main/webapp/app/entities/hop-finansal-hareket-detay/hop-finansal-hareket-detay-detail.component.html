@@ -1,0 +1,66 @@
+
+<div *ngIf="hopFinansalHareketDetay">
+    <h2><span>Hop Finansal Hareket Detay</span> {{hopFinansalHareketDetay.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{hopFinansalHareketDetay.kod}}</span>
+        </dd>
+        <dt><span>Hesap Yonu</span></dt>
+        <dd>
+            <span>{{hopFinansalHareketDetay.hesapYonu}}</span>
+        </dd>
+        <dt><span>Hesap</span></dt>
+        <dd>
+            <span>{{hopFinansalHareketDetay.hesap}}</span>
+        </dd>
+        <dt><span>Karsi Hesap</span></dt>
+        <dd>
+            <span>{{hopFinansalHareketDetay.karsiHesap}}</span>
+        </dd>
+        <dt><span>Tutar</span></dt>
+        <dd>
+            <span>{{hopFinansalHareketDetay.tutar}}</span>
+        </dd>
+        <dt><span>Finansal Hareket</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareketDetay.finansalHareket">
+                <a [routerLink]="['/hop-finansal-hareket', hopFinansalHareketDetay.finansalHareket?.id]">{{hopFinansalHareketDetay.finansalHareket?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Dosya Borc</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareketDetay.dosyaBorc">
+                <a [routerLink]="['/hop-dosya-borc', hopFinansalHareketDetay.dosyaBorc?.id]">{{hopFinansalHareketDetay.dosyaBorc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Dosya Borc Kalem</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareketDetay.dosyaBorcKalem">
+                <a [routerLink]="['/hop-dosya-borc-kalem', hopFinansalHareketDetay.dosyaBorcKalem?.id]">{{hopFinansalHareketDetay.dosyaBorcKalem?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Ilgi</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareketDetay.ilgi">
+                <a [routerLink]="['/hop-finansal-hareket-detay', hopFinansalHareketDetay.ilgi?.id]">{{hopFinansalHareketDetay.ilgi?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hop-finansal-hareket-detay/'+ hopFinansalHareketDetay.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

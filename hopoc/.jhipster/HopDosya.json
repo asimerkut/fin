@@ -1,0 +1,29 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "klasor",
+            "otherEntityName": "hopDosya",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "dosyaTipi",
+            "fieldType": "EnmDosyaTipi",
+            "fieldValues": "ICRA,DAVA,DEGISIK,KLASOR"
+        }
+    ],
+    "changelogDate": "20180210170426",
+    "entityTableName": "hop_dosya",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

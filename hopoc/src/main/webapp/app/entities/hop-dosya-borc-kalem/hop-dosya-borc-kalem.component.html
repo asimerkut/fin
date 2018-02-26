@@ -1,0 +1,91 @@
+<div>
+    <h2>
+        <span>Hop Dosya Borc Kalems</span>
+        <button class="btn btn-primary float-right jh-create-entity create-hop-dosya-borc-kalem" [routerLink]="['/', { outlets: { popup: ['hop-dosya-borc-kalem-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Hop Dosya Borc Kalem
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="hopDosyaBorcKalems">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Kod</span></th>
+            <th><span>Tutar</span></th>
+            <th><span>Dosya Borc</span></th>
+            <th><span>Borc</span></th>
+            <th><span>Masraf</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hopDosyaBorcKalem of hopDosyaBorcKalems ;trackBy: trackId">
+                <td><a [routerLink]="['../hop-dosya-borc-kalem', hopDosyaBorcKalem.id ]">{{hopDosyaBorcKalem.id}}</a></td>
+                <td>{{hopDosyaBorcKalem.kod}}</td>
+                <td>{{hopDosyaBorcKalem.tutar}}</td>
+                <td>
+                    <div *ngIf="hopDosyaBorcKalem.dosyaBorc">
+                        <a [routerLink]="['../hop-dosya-borc', hopDosyaBorcKalem.dosyaBorc?.id ]" >{{hopDosyaBorcKalem.dosyaBorc?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="hopDosyaBorcKalem.borc">
+                        <a [routerLink]="['../hop-borc', hopDosyaBorcKalem.borc?.id ]" >{{hopDosyaBorcKalem.borc?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="hopDosyaBorcKalem.masraf">
+                        <a [routerLink]="['../hop-masraf', hopDosyaBorcKalem.masraf?.id ]" >{{hopDosyaBorcKalem.masraf?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../hop-dosya-borc-kalem', hopDosyaBorcKalem.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-dosya-borc-kalem/'+ hopDosyaBorcKalem.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-dosya-borc-kalem/'+ hopDosyaBorcKalem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,46 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHopDosyaLabel">Create or edit a Hop Dosya</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!hopDosya.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="hopDosya.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="hopDosya.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosyaTipi">Dosya Tipi</label>
+            <select class="form-control" name="dosyaTipi" [(ngModel)]="hopDosya.dosyaTipi" id="field_dosyaTipi" >
+                <option value="ICRA">ICRA</option>
+                <option value="DAVA">DAVA</option>
+                <option value="DEGISIK">DEGISIK</option>
+                <option value="KLASOR">KLASOR</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_klasor">Klasor</label>
+            <select class="form-control" id="field_klasor" name="klasor" [(ngModel)]="hopDosya.klasor" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopDosyaOption.id === hopDosya.klasor?.id ? hopDosya.klasor : hopDosyaOption" *ngFor="let hopDosyaOption of hopdosyas; trackBy: trackHopDosyaById">{{hopDosyaOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,44 @@
+
+<div *ngIf="hopMasraf">
+    <h2><span>Hop Masraf</span> {{hopMasraf.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{hopMasraf.kod}}</span>
+        </dd>
+        <dt><span>Tutar</span></dt>
+        <dd>
+            <span>{{hopMasraf.tutar}}</span>
+        </dd>
+        <dt><span>Masraf Tipi</span></dt>
+        <dd>
+            <span>{{hopMasraf.masrafTipi}}</span>
+        </dd>
+        <dt><span>Tarih</span></dt>
+        <dd>
+            <span>{{hopMasraf.tarih | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="hopMasraf.dosya">
+                <a [routerLink]="['/hop-dosya', hopMasraf.dosya?.id]">{{hopMasraf.dosya?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hop-masraf/'+ hopMasraf.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

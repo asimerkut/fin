@@ -1,0 +1,50 @@
+
+<div *ngIf="hopFinansalHareket">
+    <h2><span>Hop Finansal Hareket</span> {{hopFinansalHareket.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{hopFinansalHareket.kod}}</span>
+        </dd>
+        <dt><span>Islem Kodu</span></dt>
+        <dd>
+            <span>{{hopFinansalHareket.islemKodu}}</span>
+        </dd>
+        <dt><span>Tarih</span></dt>
+        <dd>
+            <span>{{hopFinansalHareket.tarih | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Tutar</span></dt>
+        <dd>
+            <span>{{hopFinansalHareket.tutar}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareket.dosya">
+                <a [routerLink]="['/hop-dosya', hopFinansalHareket.dosya?.id]">{{hopFinansalHareket.dosya?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Ilgi</span></dt>
+        <dd>
+            <div *ngIf="hopFinansalHareket.ilgi">
+                <a [routerLink]="['/hop-finansal-hareket', hopFinansalHareket.ilgi?.id]">{{hopFinansalHareket.ilgi?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hop-finansal-hareket/'+ hopFinansalHareket.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

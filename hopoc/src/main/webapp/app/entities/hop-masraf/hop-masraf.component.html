@@ -1,0 +1,83 @@
+<div>
+    <h2>
+        <span>Hop Masrafs</span>
+        <button class="btn btn-primary float-right jh-create-entity create-hop-masraf" [routerLink]="['/', { outlets: { popup: ['hop-masraf-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Hop Masraf
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="hopMasrafs">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Kod</span></th>
+            <th><span>Tutar</span></th>
+            <th><span>Masraf Tipi</span></th>
+            <th><span>Tarih</span></th>
+            <th><span>Dosya</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hopMasraf of hopMasrafs ;trackBy: trackId">
+                <td><a [routerLink]="['../hop-masraf', hopMasraf.id ]">{{hopMasraf.id}}</a></td>
+                <td>{{hopMasraf.kod}}</td>
+                <td>{{hopMasraf.tutar}}</td>
+                <td>{{hopMasraf.masrafTipi}}</td>
+                <td>{{hopMasraf.tarih | date:'mediumDate'}}</td>
+                <td>
+                    <div *ngIf="hopMasraf.dosya">
+                        <a [routerLink]="['../hop-dosya', hopMasraf.dosya?.id ]" >{{hopMasraf.dosya?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../hop-masraf', hopMasraf.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-masraf/'+ hopMasraf.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-masraf/'+ hopMasraf.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

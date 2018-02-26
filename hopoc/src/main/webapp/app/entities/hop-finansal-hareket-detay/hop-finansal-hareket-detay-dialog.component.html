@@ -1,0 +1,116 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHopFinansalHareketDetayLabel">Create or edit a Hop Finansal Hareket Detay</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!hopFinansalHareketDetay.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="hopFinansalHareketDetay.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="hopFinansalHareketDetay.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hesapYonu">Hesap Yonu</label>
+            <input type="number" class="form-control" name="hesapYonu" id="field_hesapYonu"
+                [(ngModel)]="hopFinansalHareketDetay.hesapYonu" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hesap">Hesap</label>
+            <select class="form-control" name="hesap" [(ngModel)]="hopFinansalHareketDetay.hesap" id="field_hesap" >
+                <option value="DB">DB</option>
+                <option value="DB_00">DB_00</option>
+                <option value="DB_01">DB_01</option>
+                <option value="DB_02">DB_02</option>
+                <option value="DB_03">DB_03</option>
+                <option value="DB_04">DB_04</option>
+                <option value="DB_05">DB_05</option>
+                <option value="DB_06">DB_06</option>
+                <option value="DB_07">DB_07</option>
+                <option value="GL">GL</option>
+                <option value="GL_00">GL_00</option>
+                <option value="GL_10">GL_10</option>
+                <option value="GL_20">GL_20</option>
+                <option value="GL_30">GL_30</option>
+                <option value="FE">FE</option>
+                <option value="FE_10">FE_10</option>
+                <option value="TH">TH</option>
+                <option value="TH_10">TH_10</option>
+                <option value="TH_20">TH_20</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_karsiHesap">Karsi Hesap</label>
+            <select class="form-control" name="karsiHesap" [(ngModel)]="hopFinansalHareketDetay.karsiHesap" id="field_karsiHesap" >
+                <option value="DB">DB</option>
+                <option value="DB_00">DB_00</option>
+                <option value="DB_01">DB_01</option>
+                <option value="DB_02">DB_02</option>
+                <option value="DB_03">DB_03</option>
+                <option value="DB_04">DB_04</option>
+                <option value="DB_05">DB_05</option>
+                <option value="DB_06">DB_06</option>
+                <option value="DB_07">DB_07</option>
+                <option value="GL">GL</option>
+                <option value="GL_00">GL_00</option>
+                <option value="GL_10">GL_10</option>
+                <option value="GL_20">GL_20</option>
+                <option value="GL_30">GL_30</option>
+                <option value="FE">FE</option>
+                <option value="FE_10">FE_10</option>
+                <option value="TH">TH</option>
+                <option value="TH_10">TH_10</option>
+                <option value="TH_20">TH_20</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tutar">Tutar</label>
+            <input type="number" class="form-control" name="tutar" id="field_tutar"
+                [(ngModel)]="hopFinansalHareketDetay.tutar" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_finansalHareket">Finansal Hareket</label>
+            <select class="form-control" id="field_finansalHareket" name="finansalHareket" [(ngModel)]="hopFinansalHareketDetay.finansalHareket" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopFinansalHareketOption.id === hopFinansalHareketDetay.finansalHareket?.id ? hopFinansalHareketDetay.finansalHareket : hopFinansalHareketOption" *ngFor="let hopFinansalHareketOption of hopfinansalharekets; trackBy: trackHopFinansalHareketById">{{hopFinansalHareketOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosyaBorc">Dosya Borc</label>
+            <select class="form-control" id="field_dosyaBorc" name="dosyaBorc" [(ngModel)]="hopFinansalHareketDetay.dosyaBorc" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopDosyaBorcOption.id === hopFinansalHareketDetay.dosyaBorc?.id ? hopFinansalHareketDetay.dosyaBorc : hopDosyaBorcOption" *ngFor="let hopDosyaBorcOption of hopdosyaborcs; trackBy: trackHopDosyaBorcById">{{hopDosyaBorcOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosyaBorcKalem">Dosya Borc Kalem</label>
+            <select class="form-control" id="field_dosyaBorcKalem" name="dosyaBorcKalem" [(ngModel)]="hopFinansalHareketDetay.dosyaBorcKalem" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopDosyaBorcKalemOption.id === hopFinansalHareketDetay.dosyaBorcKalem?.id ? hopFinansalHareketDetay.dosyaBorcKalem : hopDosyaBorcKalemOption" *ngFor="let hopDosyaBorcKalemOption of hopdosyaborckalems; trackBy: trackHopDosyaBorcKalemById">{{hopDosyaBorcKalemOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_ilgi">Ilgi</label>
+            <select class="form-control" id="field_ilgi" name="ilgi" [(ngModel)]="hopFinansalHareketDetay.ilgi" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopFinansalHareketDetayOption.id === hopFinansalHareketDetay.ilgi?.id ? hopFinansalHareketDetay.ilgi : hopFinansalHareketDetayOption" *ngFor="let hopFinansalHareketDetayOption of hopfinansalhareketdetays; trackBy: trackHopFinansalHareketDetayById">{{hopFinansalHareketDetayOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity HopFinansalHareketDetay.
+    -->
+    <changeSet id="20180210170432-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="finansal_hareket_id"
+                                 baseTableName="hop_finansal_hareket_detay"
+                                 constraintName="fk_hop_finansal_hareket_detay_finansal_hareket_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hop_finansal_hareket"/>
+
+        <addForeignKeyConstraint baseColumnNames="dosya_borc_id"
+                                 baseTableName="hop_finansal_hareket_detay"
+                                 constraintName="fk_hop_finansal_hareket_detay_dosya_borc_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hop_dosya_borc"/>
+
+        <addForeignKeyConstraint baseColumnNames="dosya_borc_kalem_id"
+                                 baseTableName="hop_finansal_hareket_detay"
+                                 constraintName="fk_hop_finansal_hareket_detay_dosya_borc_kalem_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hop_dosya_borc_kalem"/>
+
+        <addForeignKeyConstraint baseColumnNames="ilgi_id"
+                                 baseTableName="hop_finansal_hareket_detay"
+                                 constraintName="fk_hop_finansal_hareket_detay_ilgi_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="hop_finansal_hareket_detay"/>
+
+    </changeSet>
+</databaseChangeLog>

@@ -1,0 +1,61 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHopMasrafLabel">Create or edit a Hop Masraf</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!hopMasraf.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="hopMasraf.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="hopMasraf.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tutar">Tutar</label>
+            <input type="number" class="form-control" name="tutar" id="field_tutar"
+                [(ngModel)]="hopMasraf.tutar" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_masrafTipi">Masraf Tipi</label>
+            <select class="form-control" name="masrafTipi" [(ngModel)]="hopMasraf.masrafTipi" id="field_masrafTipi" >
+                <option value="KLASOR">KLASOR</option>
+                <option value="KLASOR_BSMV">KLASOR_BSMV</option>
+                <option value="DOSYA">DOSYA</option>
+                <option value="DOSYA_BSMV">DOSYA_BSMV</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tarih">Tarih</label>
+            <div class="input-group">
+                <input id="field_tarih" type="text" class="form-control" name="tarih" ngbDatepicker  #tarihDp="ngbDatepicker" [(ngModel)]="hopMasraf.tarih"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="tarihDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosya">Dosya</label>
+            <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="hopMasraf.dosya" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopDosyaOption.id === hopMasraf.dosya?.id ? hopMasraf.dosya : hopDosyaOption" *ngFor="let hopDosyaOption of hopdosyas; trackBy: trackHopDosyaById">{{hopDosyaOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

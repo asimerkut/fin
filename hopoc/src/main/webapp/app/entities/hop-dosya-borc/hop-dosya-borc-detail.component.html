@@ -1,0 +1,40 @@
+
+<div *ngIf="hopDosyaBorc">
+    <h2><span>Hop Dosya Borc</span> {{hopDosyaBorc.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{hopDosyaBorc.kod}}</span>
+        </dd>
+        <dt><span>Tutar</span></dt>
+        <dd>
+            <span>{{hopDosyaBorc.tutar}}</span>
+        </dd>
+        <dt><span>Borc Grubu</span></dt>
+        <dd>
+            <span>{{hopDosyaBorc.borcGrubu}}</span>
+        </dd>
+        <dt><span>Dosya</span></dt>
+        <dd>
+            <div *ngIf="hopDosyaBorc.dosya">
+                <a [routerLink]="['/hop-dosya', hopDosyaBorc.dosya?.id]">{{hopDosyaBorc.dosya?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hop-dosya-borc/'+ hopDosyaBorc.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

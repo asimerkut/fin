@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "hopDosya",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tutar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "borcTipi",
+            "fieldType": "EnmBorcTipi",
+            "fieldValues": "FATURA,URUN"
+        },
+        {
+            "fieldName": "tarih",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180210170427",
+    "entityTableName": "hop_borc",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

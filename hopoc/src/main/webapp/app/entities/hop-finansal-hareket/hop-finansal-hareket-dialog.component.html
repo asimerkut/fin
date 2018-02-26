@@ -1,0 +1,77 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myHopFinansalHareketLabel">Create or edit a Hop Finansal Hareket</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!hopFinansalHareket.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="hopFinansalHareket.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kod">Kod</label>
+            <input type="text" class="form-control" name="kod" id="field_kod"
+                [(ngModel)]="hopFinansalHareket.kod" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_islemKodu">Islem Kodu</label>
+            <select class="form-control" name="islemKodu" [(ngModel)]="hopFinansalHareket.islemKodu" id="field_islemKodu" >
+                <option value="ISLM_100">ISLM_100</option>
+                <option value="ISLM_101">ISLM_101</option>
+                <option value="ISLM_111">ISLM_111</option>
+                <option value="ISLM_114">ISLM_114</option>
+                <option value="ISLM_200">ISLM_200</option>
+                <option value="ISLM_201">ISLM_201</option>
+                <option value="ISLM_542">ISLM_542</option>
+                <option value="IPTL_301">IPTL_301</option>
+                <option value="IPTL_311">IPTL_311</option>
+                <option value="IPTL_314">IPTL_314</option>
+                <option value="IPTL_400">IPTL_400</option>
+                <option value="IPTL_401">IPTL_401</option>
+                <option value="IPTL_742">IPTL_742</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tarih">Tarih</label>
+            <div class="input-group">
+                <input id="field_tarih" type="text" class="form-control" name="tarih" ngbDatepicker  #tarihDp="ngbDatepicker" [(ngModel)]="hopFinansalHareket.tarih"
+                />
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="tarihDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tutar">Tutar</label>
+            <input type="number" class="form-control" name="tutar" id="field_tutar"
+                [(ngModel)]="hopFinansalHareket.tutar" />
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_dosya">Dosya</label>
+            <select class="form-control" id="field_dosya" name="dosya" [(ngModel)]="hopFinansalHareket.dosya" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopDosyaOption.id === hopFinansalHareket.dosya?.id ? hopFinansalHareket.dosya : hopDosyaOption" *ngFor="let hopDosyaOption of hopdosyas; trackBy: trackHopDosyaById">{{hopDosyaOption.kod}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_ilgi">Ilgi</label>
+            <select class="form-control" id="field_ilgi" name="ilgi" [(ngModel)]="hopFinansalHareket.ilgi" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="hopFinansalHareketOption.id === hopFinansalHareket.ilgi?.id ? hopFinansalHareket.ilgi : hopFinansalHareketOption" *ngFor="let hopFinansalHareketOption of hopfinansalharekets; trackBy: trackHopFinansalHareketById">{{hopFinansalHareketOption.kod}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

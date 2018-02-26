@@ -1,0 +1,89 @@
+<div>
+    <h2>
+        <span>Hop Finansal Harekets</span>
+        <button class="btn btn-primary float-right jh-create-entity create-hop-finansal-hareket" [routerLink]="['/', { outlets: { popup: ['hop-finansal-hareket-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Hop Finansal Hareket
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="hopFinansalHarekets">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Kod</span></th>
+            <th><span>Islem Kodu</span></th>
+            <th><span>Tarih</span></th>
+            <th><span>Tutar</span></th>
+            <th><span>Dosya</span></th>
+            <th><span>Ilgi</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let hopFinansalHareket of hopFinansalHarekets ;trackBy: trackId">
+                <td><a [routerLink]="['../hop-finansal-hareket', hopFinansalHareket.id ]">{{hopFinansalHareket.id}}</a></td>
+                <td>{{hopFinansalHareket.kod}}</td>
+                <td>{{hopFinansalHareket.islemKodu}}</td>
+                <td>{{hopFinansalHareket.tarih | date:'mediumDate'}}</td>
+                <td>{{hopFinansalHareket.tutar}}</td>
+                <td>
+                    <div *ngIf="hopFinansalHareket.dosya">
+                        <a [routerLink]="['../hop-dosya', hopFinansalHareket.dosya?.id ]" >{{hopFinansalHareket.dosya?.kod}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="hopFinansalHareket.ilgi">
+                        <a [routerLink]="['../hop-finansal-hareket', hopFinansalHareket.ilgi?.id ]" >{{hopFinansalHareket.ilgi?.kod}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../hop-finansal-hareket', hopFinansalHareket.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-finansal-hareket/'+ hopFinansalHareket.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'hop-finansal-hareket/'+ hopFinansalHareket.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

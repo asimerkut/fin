@@ -1,0 +1,60 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "finansalHareket",
+            "otherEntityName": "hopFinansalHareket",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosyaBorc",
+            "otherEntityName": "hopDosyaBorc",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosyaBorcKalem",
+            "otherEntityName": "hopDosyaBorcKalem",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "ilgi",
+            "otherEntityName": "hopFinansalHareketDetay",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "hesapYonu",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "hesap",
+            "fieldType": "EnmHesap",
+            "fieldValues": "DB,DB_00,DB_01,DB_02,DB_03,DB_04,DB_05,DB_06,DB_07,GL,GL_00,GL_10,GL_20,GL_30,FE,FE_10,TH,TH_10,TH_20"
+        },
+        {
+            "fieldName": "karsiHesap",
+            "fieldType": "EnmHesap",
+            "fieldValues": "DB,DB_00,DB_01,DB_02,DB_03,DB_04,DB_05,DB_06,DB_07,GL,GL_00,GL_10,GL_20,GL_30,FE,FE_10,TH,TH_10,TH_20"
+        },
+        {
+            "fieldName": "tutar",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180210170432",
+    "entityTableName": "hop_finansal_hareket_detay",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

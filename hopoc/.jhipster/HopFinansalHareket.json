@@ -1,0 +1,43 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "hopDosya",
+            "otherEntityField": "kod"
+        },
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "ilgi",
+            "otherEntityName": "hopFinansalHareket",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "islemKodu",
+            "fieldType": "EnmIslemKodu",
+            "fieldValues": "ISLM_100,ISLM_101,ISLM_111,ISLM_114,ISLM_200,ISLM_201,ISLM_542,IPTL_301,IPTL_311,IPTL_314,IPTL_400,IPTL_401,IPTL_742"
+        },
+        {
+            "fieldName": "tarih",
+            "fieldType": "LocalDate"
+        },
+        {
+            "fieldName": "tutar",
+            "fieldType": "BigDecimal"
+        }
+    ],
+    "changelogDate": "20180210170431",
+    "entityTableName": "hop_finansal_hareket",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

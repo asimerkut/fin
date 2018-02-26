@@ -1,0 +1,48 @@
+
+<div *ngIf="hopDosyaBorcKalem">
+    <h2><span>Hop Dosya Borc Kalem</span> {{hopDosyaBorcKalem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Kod</span></dt>
+        <dd>
+            <span>{{hopDosyaBorcKalem.kod}}</span>
+        </dd>
+        <dt><span>Tutar</span></dt>
+        <dd>
+            <span>{{hopDosyaBorcKalem.tutar}}</span>
+        </dd>
+        <dt><span>Dosya Borc</span></dt>
+        <dd>
+            <div *ngIf="hopDosyaBorcKalem.dosyaBorc">
+                <a [routerLink]="['/hop-dosya-borc', hopDosyaBorcKalem.dosyaBorc?.id]">{{hopDosyaBorcKalem.dosyaBorc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Borc</span></dt>
+        <dd>
+            <div *ngIf="hopDosyaBorcKalem.borc">
+                <a [routerLink]="['/hop-borc', hopDosyaBorcKalem.borc?.id]">{{hopDosyaBorcKalem.borc?.kod}}</a>
+            </div>
+        </dd>
+        <dt><span>Masraf</span></dt>
+        <dd>
+            <div *ngIf="hopDosyaBorcKalem.masraf">
+                <a [routerLink]="['/hop-masraf', hopDosyaBorcKalem.masraf?.id]">{{hopDosyaBorcKalem.masraf?.kod}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'hop-dosya-borc-kalem/'+ hopDosyaBorcKalem.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

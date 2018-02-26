@@ -1,0 +1,135 @@
+entity HopDosya {
+    kod String,
+	dosyaTipi EnmDosyaTipi
+}
+
+entity HopBorc {
+	kod String,
+    tutar BigDecimal,
+    borcTipi EnmBorcTipi,
+    tarih LocalDate
+}
+
+entity HopMasraf {
+	kod String,
+    tutar BigDecimal,
+    masrafTipi EnmMasrafTipi,
+    tarih LocalDate
+}
+
+entity HopDosyaBorc {
+	kod String,
+    tutar BigDecimal,
+    borcGrubu EnmBorcGrubu
+  }
+
+entity HopDosyaBorcKalem {
+    kod String,
+    tutar BigDecimal
+}
+
+entity HopFinansalHareket {
+	kod String,
+    islemKodu EnmIslemKodu,
+	tarih LocalDate,
+    tutar BigDecimal
+}
+
+entity HopFinansalHareketDetay {
+	kod String,
+    hesapYonu Long,
+    hesap EnmHesap,
+    karsiHesap EnmHesap,
+    tutar BigDecimal
+}
+
+enum EnmDosyaTipi {
+    ICRA,
+    DAVA,
+    DEGISIK,
+    KLASOR
+  }
+
+enum EnmBorcTipi {
+    FATURA,
+    URUN
+  }
+
+enum EnmMasrafTipi {
+    KLASOR,
+    KLASOR_BSMV,
+    DOSYA,
+    DOSYA_BSMV
+  }
+
+enum EnmHesap {
+    DB,
+    DB_00,
+    DB_01,
+    DB_02,
+    DB_03,
+    DB_04,
+    DB_05,
+    DB_06,
+    DB_07,
+    GL,
+    GL_00,
+    GL_10,
+    GL_20,
+    GL_30,
+    FE,
+    FE_10,
+    TH,
+    TH_10,
+    TH_20
+}
+
+enum EnmIslemKodu {
+    ISLM_100,
+    ISLM_101,
+    ISLM_111,
+    ISLM_114,
+    ISLM_200,
+    ISLM_201,
+    ISLM_542,
+    IPTL_301,
+    IPTL_311,
+    IPTL_314,
+    IPTL_400,
+    IPTL_401,
+    IPTL_742
+}
+
+enum EnmBorcGrubu {
+    BG_00,
+    BG_01,
+    BG_02,
+    BG_03,
+    BG_04,
+    BG_05,
+    BG_06,
+    BG_07
+}
+
+relationship ManyToOne {
+	HopDosya{klasor(kod)} to HopDosya,
+
+    HopDosyaBorc{dosya(kod)} to HopDosya,
+
+    HopMasraf{dosya(kod)} to HopDosya,
+    HopBorc{dosya(kod)} to HopDosya,
+
+    HopFinansalHareket{dosya(kod)} to HopDosya,
+    HopFinansalHareket{ilgi(kod)} to HopFinansalHareket,
+
+    HopDosyaBorcKalem{dosyaBorc(kod)} to HopDosyaBorc,
+    HopDosyaBorcKalem{borc(kod)} to HopBorc,
+    HopDosyaBorcKalem{masraf(kod)} to HopMasraf,
+
+	HopFinansalHareketDetay{finansalHareket(kod)} to HopFinansalHareket,
+    HopFinansalHareketDetay{dosyaBorc(kod)} to HopDosyaBorc,
+    HopFinansalHareketDetay{dosyaBorcKalem(kod)} to HopDosyaBorcKalem,
+    HopFinansalHareketDetay{ilgi(kod)} to HopFinansalHareketDetay
+}
+
+service all with serviceImpl

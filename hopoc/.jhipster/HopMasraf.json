@@ -1,0 +1,37 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "hopDosya",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tutar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "masrafTipi",
+            "fieldType": "EnmMasrafTipi",
+            "fieldValues": "KLASOR,KLASOR_BSMV,DOSYA,DOSYA_BSMV"
+        },
+        {
+            "fieldName": "tarih",
+            "fieldType": "LocalDate"
+        }
+    ],
+    "changelogDate": "20180210170428",
+    "entityTableName": "hop_masraf",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}

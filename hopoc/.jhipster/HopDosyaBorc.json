@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipType": "many-to-one",
+            "relationshipName": "dosya",
+            "otherEntityName": "hopDosya",
+            "otherEntityField": "kod"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "kod",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tutar",
+            "fieldType": "BigDecimal"
+        },
+        {
+            "fieldName": "borcGrubu",
+            "fieldType": "EnmBorcGrubu",
+            "fieldValues": "BG_00,BG_01,BG_02,BG_03,BG_04,BG_05,BG_06,BG_07"
+        }
+    ],
+    "changelogDate": "20180210170429",
+    "entityTableName": "hop_dosya_borc",
+    "dto": "no",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "enableEntityAudit": true
+}
