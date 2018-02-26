@@ -1,0 +1,98 @@
+select * from def_type;
+
+insert into def_type (id, code, name)
+  select 100+row_number() over (ORDER BY tip_kod), tip_kod, tip_aciklama FROM  gmut5000 where tip_kod!='.' order by tip_kod;
+
+select * from gmut5001
+where sabit=0;
+
+update gmut5001 set masterid = null where masterid = 0;
+
+insert into def_item
+select g.id, g.full_kod,  g.ack, g.seviye, Cast(g.secim as boolean), Cast(g.sabit as boolean), t.id, g.masterid   from gmut5001 g, def_type t
+where t.code = g.tip_kod;
+
+
+insert into def_relation
+  select row_number() over (ORDER BY tip_kod) id , null param,
+  (select id from def_type where code = x.tip_kod) as tip,
+  (select id from def_type where code = x.ref_tip) as refer,
+  1,current_date,1,current_date
+from gmut5000 x where ref_tip is not null;
+
+insert INTO def_answer
+select row_number() over (ORDER BY id) id ,
+ null ans,
+ 1 rel_id,
+ id,
+ ref_id,
+ 1,current_date,1,current_date
+from gmut5002;
+
+insert into def_relation values (2, 'KATSAYI', 103, null, 1,current_date,1,current_date);
+insert into def_relation values (3, 'TARIFE_GOR', 103, null, 1,current_date,1,current_date);
+insert into def_relation values (4, 'GOSTERGE_GOR', 103, null, 1,current_date,1,current_date);
+
+insert into def_answer
+select 500+row_number() over (ORDER BY id) id,
+  c.answer, 2 relid, c.id src, null tar,
+  1,current_date,1,current_date
+ from gmut5006 C where c.answer !='' and c.par_kod='KATSAYI';
+
+insert into def_answer
+select 550+row_number() over (ORDER BY id) id,
+  c.answer, 4 relid, c.id src, null tar,
+  1,current_date,1,current_date
+ from gmut5006 C where c.answer !='' and c.par_kod='GOSTERGE_GOR';
+
+insert into def_answer
+  select 560+row_number() over (ORDER BY id) id,
+  c.answer, 3 relid, c.id src, null tar,
+  1,current_date,1,current_date
+ from gmut5006 C where c.answer !='' and c.par_kod='TARIFE_GOR';
+
+insert into def_relation values (5, 'DERS_EK_IST', 114, 118, 1,current_date,1,current_date);
+insert into def_relation values (6, 'DERS_EK_ZOR', 114, 118, 1,current_date,1,current_date);
+insert into def_relation values (7, 'DERS_MA_KAR', 114, 118, 1,current_date,1,current_date);
+insert into def_relation values (8, 'GORV_EK_IST', 114, 118, 1,current_date,1,current_date);
+insert into def_relation values (9, 'GORV_EK_ZOR', 114, 118, 1,current_date,1,current_date);
+insert into def_relation values (10,'GORV_MA_KAR', 114, 118, 1,current_date,1,current_date);
+
+insert into def_answer
+  select 570+row_number() over (ORDER BY id) id,
+  c.answer, 5 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='DERS_EK_IST';
+
+insert into def_answer
+  select 1040+row_number() over (ORDER BY id) id,
+  c.answer, 6 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='DERS_EK_ZOR';
+
+insert into def_answer
+  select 1510+row_number() over (ORDER BY id) id,
+  c.answer, 7 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='DERS_MA_KAR';
+
+insert into def_answer
+  select 1980+row_number() over (ORDER BY id) id,
+  c.answer, 8 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='GORV_EK_IST';
+
+insert into def_answer
+  select 2450+row_number() over (ORDER BY id) id,
+  c.answer, 9 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='GORV_EK_ZOR';
+
+
+insert into def_answer
+  select 2920+row_number() over (ORDER BY id) id,
+  c.answer, 10 relid, c.id src, c.ref_id tar,
+  1,current_date,1,current_date
+ from gmut5004 C where c.answer is not null and c.par_kod='GORV_MA_KAR';
+
+commit;

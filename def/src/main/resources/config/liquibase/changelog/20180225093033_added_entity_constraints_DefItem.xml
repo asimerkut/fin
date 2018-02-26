@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity DefItem.
+    -->
+    <changeSet id="20180225093033-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="type_id"
+                                 baseTableName="def_item"
+                                 constraintName="fk_def_item_type_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_type"/>
+
+        <addForeignKeyConstraint baseColumnNames="parent_id"
+                                 baseTableName="def_item"
+                                 constraintName="fk_def_item_parent_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+    </changeSet>
+</databaseChangeLog>

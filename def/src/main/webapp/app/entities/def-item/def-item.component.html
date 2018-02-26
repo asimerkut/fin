@@ -1,0 +1,91 @@
+<div>
+    <h2>
+        <span>Def Items</span>
+        <button class="btn btn-primary float-right jh-create-entity create-def-item" [routerLink]="['/', { outlets: { popup: ['def-item-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Def Item
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="defItems">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Code</span></th>
+            <th><span>Name</span></th>
+            <th><span>Item Level</span></th>
+            <th><span>Is Select</span></th>
+            <th><span>Is Const</span></th>
+            <th><span>Type</span></th>
+            <th><span>Parent</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let defItem of defItems ;trackBy: trackId">
+                <td><a [routerLink]="['../def-item', defItem.id ]">{{defItem.id}}</a></td>
+                <td>{{defItem.code}}</td>
+                <td>{{defItem.name}}</td>
+                <td>{{defItem.itemLevel}}</td>
+                <td>{{defItem.isSelect}}</td>
+                <td>{{defItem.isConst}}</td>
+                <td>
+                    <div *ngIf="defItem.type">
+                        <a [routerLink]="['../def-type', defItem.type?.id ]" >{{defItem.type?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="defItem.parent">
+                        <a [routerLink]="['../def-item', defItem.parent?.id ]" >{{defItem.parent?.code}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../def-item', defItem.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'def-item/'+ defItem.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'def-item/'+ defItem.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
