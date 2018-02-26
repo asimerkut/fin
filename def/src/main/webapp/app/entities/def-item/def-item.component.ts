@@ -30,39 +30,30 @@ defItems: DefItem[];
         private defTypeService: DefTypeService
 
     ) {
-        this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search'] ?
-            this.activatedRoute.snapshot.params['search'] : '';
+        // this.currentSearch = this.activatedRoute.snapshot && this.activatedRoute.snapshot.params['search'] ?
+        //    this.activatedRoute.snapshot.params['search'] : '';
     }
 
     loadAll() {
-        if (this.currentSearch) {
-            this.defItemService.search({
+        console.log(this.comboSelModel.comboSel);
+        const param = {
+            selId: this.comboSelModel.comboSel == null ? 0 : this.comboSelModel.comboSel.id
+        };
+        this.currentSearch = JSON.stringify(param);
+        this.defItemService.search({
                 query: this.currentSearch,
                 }).subscribe(
                     (res: HttpResponse<DefItem[]>) => this.defItems = res.body,
                     (res: HttpErrorResponse) => this.onError(res.message)
                 );
             return;
-       }
-        this.defItemService.query().subscribe(
-            (res: HttpResponse<DefItem[]>) => {
-                this.defItems = res.body;
-                this.currentSearch = '';
-            },
-            (res: HttpErrorResponse) => this.onError(res.message)
-        );
     }
 
-    search(query) {
-        if (!query) {
-            return this.clear();
-        }
-        this.currentSearch = query;
+    search() {
         this.loadAll();
     }
 
     clear() {
-        this.currentSearch = '';
         this.loadAll();
     }
     ngOnInit() {
@@ -92,12 +83,6 @@ defItems: DefItem[];
     }
 
     onChange($event) {
-        // console.log($event.srcElement.selectedOptions[0].getAttribute('ng-reflect-ng-value'));
-        console.log(this.comboSelModel.comboSel);
-        const param = {
-            selId: this.comboSelModel.comboSel.id
-        };
-        const str: String = JSON.stringify(param);
-        this.search(str);
+        this.search();
     }
 }
