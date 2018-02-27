@@ -1,0 +1,129 @@
+<div>
+    <h2>
+        <span>Per People</span>
+        <button class="btn btn-primary float-right jh-create-entity create-per-person" [routerLink]="['/', { outlets: { popup: ['per-person-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Per Person
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="perPeople">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Code</span></th>
+            <th><span>Name</span></th>
+            <th><span>Is Active</span></th>
+            <th><span>Email</span></th>
+            <th><span>Phone</span></th>
+            <th><span>Cins</span></th>
+            <th><span>Medeni</span></th>
+            <th><span>Okul</span></th>
+            <th><span>Hizmt</span></th>
+            <th><span>Brans</span></th>
+            <th><span>Unvan</span></th>
+            <th><span>Kadro</span></th>
+            <th><span>Karyr</span></th>
+            <th><span>Konum</span></th>
+            <th><span>User</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let perPerson of perPeople ;trackBy: trackId">
+                <td><a [routerLink]="['../per-person', perPerson.id ]">{{perPerson.id}}</a></td>
+                <td>{{perPerson.code}}</td>
+                <td>{{perPerson.name}}</td>
+                <td>{{perPerson.isActive}}</td>
+                <td>{{perPerson.email}}</td>
+                <td>{{perPerson.phone}}</td>
+                <td>{{perPerson.cins}}</td>
+                <td>{{perPerson.medeni}}</td>
+                <td>
+                    <div *ngIf="perPerson.okul">
+                        <a [routerLink]="['../per-company', perPerson.okul?.id ]" >{{perPerson.okul?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.hizmt">
+                        <a [routerLink]="['../def-item', perPerson.hizmt?.id ]" >{{perPerson.hizmt?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.brans">
+                        <a [routerLink]="['../def-item', perPerson.brans?.id ]" >{{perPerson.brans?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.unvan">
+                        <a [routerLink]="['../def-item', perPerson.unvan?.id ]" >{{perPerson.unvan?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.kadro">
+                        <a [routerLink]="['../def-item', perPerson.kadro?.id ]" >{{perPerson.kadro?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.karyr">
+                        <a [routerLink]="['../def-item', perPerson.karyr?.id ]" >{{perPerson.karyr?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPerson.konum">
+                        <a [routerLink]="['../def-item', perPerson.konum?.id ]" >{{perPerson.konum?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    {{perPerson.user?.login}}
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../per-person', perPerson.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-person/'+ perPerson.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-person/'+ perPerson.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

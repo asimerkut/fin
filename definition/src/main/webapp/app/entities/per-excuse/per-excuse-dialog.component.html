@@ -1,0 +1,119 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPerExcuseLabel">Create or edit a Per Excuse</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!perExcuse.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="perExcuse.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_startDate">Start Date</label>
+            <div class="input-group">
+                <input id="field_startDate" type="text" class="form-control" name="startDate" ngbDatepicker  #startDateDp="ngbDatepicker" [(ngModel)]="perExcuse.startDate"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="startDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.startDate?.dirty && editForm.controls.startDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.startDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_startDersNo">Start Ders No</label>
+            <input type="number" class="form-control" name="startDersNo" id="field_startDersNo"
+                [(ngModel)]="perExcuse.startDersNo" required max="15"/>
+            <div [hidden]="!(editForm.controls.startDersNo?.dirty && editForm.controls.startDersNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.startDersNo?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.startDersNo?.errors?.max">
+                    This field cannot be more than 15.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.startDersNo?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_finishDate">Finish Date</label>
+            <div class="input-group">
+                <input id="field_finishDate" type="text" class="form-control" name="finishDate" ngbDatepicker  #finishDateDp="ngbDatepicker" [(ngModel)]="perExcuse.finishDate"
+                required/>
+                <span class="input-group-append">
+                    <button type="button" class="btn btn-secondary" (click)="finishDateDp.toggle()"><i class="fa fa-calendar"></i></button>
+                </span>
+            </div>
+            <div [hidden]="!(editForm.controls.finishDate?.dirty && editForm.controls.finishDate?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.finishDate?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_finishDersNo">Finish Ders No</label>
+            <input type="number" class="form-control" name="finishDersNo" id="field_finishDersNo"
+                [(ngModel)]="perExcuse.finishDersNo" required max="15"/>
+            <div [hidden]="!(editForm.controls.finishDersNo?.dirty && editForm.controls.finishDersNo?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.finishDersNo?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.finishDersNo?.errors?.max">
+                    This field cannot be more than 15.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.finishDersNo?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_isExcuse">Is Excuse</label>
+            <input type="checkbox" class="form-control" name="isExcuse" id="field_isExcuse"
+                [(ngModel)]="perExcuse.isExcuse" />
+            <div [hidden]="!(editForm.controls.isExcuse?.dirty && editForm.controls.isExcuse?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.isExcuse?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_person">Person</label>
+            <select class="form-control" id="field_person" name="person" [(ngModel)]="perExcuse.person"  required>
+                <option *ngIf="!editForm.value.person" [ngValue]="null" selected></option>
+                <option [ngValue]="perPersonOption.id === perExcuse.person?.id ? perExcuse.person : perPersonOption" *ngFor="let perPersonOption of perpeople; trackBy: trackPerPersonById">{{perPersonOption.code}}</option>
+            </select>
+        </div>
+        <div [hidden]="!(editForm.controls.person?.dirty && editForm.controls.person?.invalid)">
+            <small class="form-text text-danger"
+                [hidden]="!editForm.controls.person?.errors?.required">
+                This field is required.
+            </small>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

@@ -1,0 +1,114 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPerCompanyLabel">Create or edit a Per Company</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!perCompany.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="perCompany.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                [(ngModel)]="perCompany.code" required maxlength="20"/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.maxlength">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="perCompany.name" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mesaiOo">Mesai Oo</label>
+            <input type="number" class="form-control" name="mesaiOo" id="field_mesaiOo"
+                [(ngModel)]="perCompany.mesaiOo" max="8"/>
+            <div [hidden]="!(editForm.controls.mesaiOo?.dirty && editForm.controls.mesaiOo?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiOo?.errors?.max">
+                    This field cannot be more than 8.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiOo?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mesaiOs">Mesai Os</label>
+            <input type="number" class="form-control" name="mesaiOs" id="field_mesaiOs"
+                [(ngModel)]="perCompany.mesaiOs" max="8"/>
+            <div [hidden]="!(editForm.controls.mesaiOs?.dirty && editForm.controls.mesaiOs?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiOs?.errors?.max">
+                    This field cannot be more than 8.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiOs?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_mesaiGc">Mesai Gc</label>
+            <input type="number" class="form-control" name="mesaiGc" id="field_mesaiGc"
+                [(ngModel)]="perCompany.mesaiGc" max="8"/>
+            <div [hidden]="!(editForm.controls.mesaiGc?.dirty && editForm.controls.mesaiGc?.invalid)">
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiGc?.errors?.max">
+                    This field cannot be more than 8.
+                </small>
+                <small class="form-text text-danger"
+                    [hidden]="!editForm.controls.mesaiGc?.errors?.number">
+                    This field should be a number.
+                </small>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_sehir">Sehir</label>
+            <select class="form-control" id="field_sehir" name="sehir" [(ngModel)]="perCompany.sehir" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perCompany.sehir?.id ? perCompany.sehir : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_tipi">Tipi</label>
+            <select class="form-control" id="field_tipi" name="tipi" [(ngModel)]="perCompany.tipi" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perCompany.tipi?.id ? perCompany.tipi : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

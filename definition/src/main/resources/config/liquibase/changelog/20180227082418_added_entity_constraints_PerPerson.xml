@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PerPerson.
+    -->
+    <changeSet id="20180227082418-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="okul_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_okul_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="per_company"/>
+
+        <addForeignKeyConstraint baseColumnNames="hizmt_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_hizmt_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="brans_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_brans_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="unvan_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_unvan_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="kadro_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_kadro_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="karyr_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_karyr_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="konum_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_konum_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="per_person"
+                                 constraintName="fk_per_person_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
+    </changeSet>
+</databaseChangeLog>

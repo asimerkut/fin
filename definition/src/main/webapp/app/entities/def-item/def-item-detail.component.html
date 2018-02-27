@@ -1,0 +1,54 @@
+
+<div *ngIf="defItem">
+    <h2><span>Def Item</span> {{defItem.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{defItem.code}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{defItem.name}}</span>
+        </dd>
+        <dt><span>Item Level</span></dt>
+        <dd>
+            <span>{{defItem.itemLevel}}</span>
+        </dd>
+        <dt><span>Is Select</span></dt>
+        <dd>
+            <span>{{defItem.isSelect}}</span>
+        </dd>
+        <dt><span>Is Const</span></dt>
+        <dd>
+            <span>{{defItem.isConst}}</span>
+        </dd>
+        <dt><span>Type</span></dt>
+        <dd>
+            <div *ngIf="defItem.type">
+                <a [routerLink]="['/def-type', defItem.type?.id]">{{defItem.type?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Parent</span></dt>
+        <dd>
+            <div *ngIf="defItem.parent">
+                <a [routerLink]="['/def-item', defItem.parent?.id]">{{defItem.parent?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'def-item/'+ defItem.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

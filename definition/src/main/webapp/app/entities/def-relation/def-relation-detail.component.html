@@ -1,0 +1,38 @@
+
+<div *ngIf="defRelation">
+    <h2><span>Def Relation</span> {{defRelation.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Parameter</span></dt>
+        <dd>
+            <span>{{defRelation.parameter}}</span>
+        </dd>
+        <dt><span>Type Source</span></dt>
+        <dd>
+            <div *ngIf="defRelation.typeSource">
+                <a [routerLink]="['/def-type', defRelation.typeSource?.id]">{{defRelation.typeSource?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Type Target</span></dt>
+        <dd>
+            <div *ngIf="defRelation.typeTarget">
+                <a [routerLink]="['/def-type', defRelation.typeTarget?.id]">{{defRelation.typeTarget?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'def-relation/'+ defRelation.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

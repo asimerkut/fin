@@ -1,0 +1,56 @@
+
+<div *ngIf="perSubmit">
+    <h2><span>Per Submit</span> {{perSubmit.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Submit Date</span></dt>
+        <dd>
+            <span>{{perSubmit.submitDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Ders Grup</span></dt>
+        <dd>
+            <span>{{perSubmit.dersGrup}}</span>
+        </dd>
+        <dt><span>Ders Sira</span></dt>
+        <dd>
+            <span>{{perSubmit.dersSira}}</span>
+        </dd>
+        <dt><span>Ders Adet</span></dt>
+        <dd>
+            <span>{{perSubmit.dersAdet}}</span>
+        </dd>
+        <dt><span>Person</span></dt>
+        <dd>
+            <div *ngIf="perSubmit.person">
+                <a [routerLink]="['/per-person', perSubmit.person?.id]">{{perSubmit.person?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Ders</span></dt>
+        <dd>
+            <div *ngIf="perSubmit.ders">
+                <a [routerLink]="['/def-item', perSubmit.ders?.id]">{{perSubmit.ders?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Excuse</span></dt>
+        <dd>
+            <div *ngIf="perSubmit.excuse">
+                <a [routerLink]="['/per-excuse', perSubmit.excuse?.id]">{{perSubmit.excuse?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'per-submit/'+ perSubmit.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

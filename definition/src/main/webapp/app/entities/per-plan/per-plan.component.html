@@ -1,0 +1,91 @@
+<div>
+    <h2>
+        <span>Per Plans</span>
+        <button class="btn btn-primary float-right jh-create-entity create-per-plan" [routerLink]="['/', { outlets: { popup: ['per-plan-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Per Plan
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="perPlans">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Start Date</span></th>
+            <th><span>Day No</span></th>
+            <th><span>Ders Grup</span></th>
+            <th><span>Ders No</span></th>
+            <th><span>Ders Adet</span></th>
+            <th><span>Person</span></th>
+            <th><span>Ders</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let perPlan of perPlans ;trackBy: trackId">
+                <td><a [routerLink]="['../per-plan', perPlan.id ]">{{perPlan.id}}</a></td>
+                <td>{{perPlan.startDate | date:'mediumDate'}}</td>
+                <td>{{perPlan.dayNo}}</td>
+                <td>{{perPlan.dersGrup}}</td>
+                <td>{{perPlan.dersNo}}</td>
+                <td>{{perPlan.dersAdet}}</td>
+                <td>
+                    <div *ngIf="perPlan.person">
+                        <a [routerLink]="['../per-person', perPlan.person?.id ]" >{{perPlan.person?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perPlan.ders">
+                        <a [routerLink]="['../def-item', perPlan.ders?.id ]" >{{perPlan.ders?.code}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../per-plan', perPlan.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-plan/'+ perPlan.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-plan/'+ perPlan.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

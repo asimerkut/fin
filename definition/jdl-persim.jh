@@ -1,3 +1,55 @@
+entity DefType {
+	code EnmType required,
+    name String required maxlength(100)
+}
+
+entity DefItem {
+	code String required maxlength(20),
+    name String required maxlength(100),
+    itemLevel Integer required max(9),
+    isSelect Boolean required,
+    isConst Boolean required
+}
+
+entity DefRelation {
+    parameter EnmParam
+}
+
+entity DefAnswer {
+	answer String maxlength(20)
+}
+
+enum EnmType {
+    BANKA,	BRANS,	DERS,	DONEM,	DURUM,
+	GGOKL,	GYERI,  HIZMT,  IZIN,   KADRO,
+    KARYR,  KONUM,  MESLK,  OKUL,   SEHIR,
+    SENDK,  TATIL,  UNVAN,  YBDIL
+}
+
+enum EnmParam {
+    GORV_MA_KAR,   GORV_EK_ZOR,
+    GORV_EK_IST,   DERS_MA_KAR,
+    DERS_EK_ZOR,   DERS_EK_IST,
+
+    KATSAYI,
+    DAYANAK_GOR,   DAYANAK_UNV,
+    GOSTERGE_GOR,  TARIFE_GOR
+}
+
+
+relationship ManyToOne {
+    DefItem{type(code) required} to DefType,
+    DefItem{parent(code)} to DefItem,
+
+    DefRelation{typeSource(code) required} to DefType,
+    DefRelation{typeTarget(code)} to DefType
+
+    DefAnswer{relation(code) required} to DefRelation,
+    DefAnswer{itemSource(code) required} to DefItem,
+    DefAnswer{itemTarget(code)} to DefItem
+
+}
+
 entity PerCompany {
     code String required maxlength(20),
     name String required maxlength(100),

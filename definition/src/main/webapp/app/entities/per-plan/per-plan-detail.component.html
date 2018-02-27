@@ -1,0 +1,54 @@
+
+<div *ngIf="perPlan">
+    <h2><span>Per Plan</span> {{perPlan.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Start Date</span></dt>
+        <dd>
+            <span>{{perPlan.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Day No</span></dt>
+        <dd>
+            <span>{{perPlan.dayNo}}</span>
+        </dd>
+        <dt><span>Ders Grup</span></dt>
+        <dd>
+            <span>{{perPlan.dersGrup}}</span>
+        </dd>
+        <dt><span>Ders No</span></dt>
+        <dd>
+            <span>{{perPlan.dersNo}}</span>
+        </dd>
+        <dt><span>Ders Adet</span></dt>
+        <dd>
+            <span>{{perPlan.dersAdet}}</span>
+        </dd>
+        <dt><span>Person</span></dt>
+        <dd>
+            <div *ngIf="perPlan.person">
+                <a [routerLink]="['/per-person', perPlan.person?.id]">{{perPlan.person?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Ders</span></dt>
+        <dd>
+            <div *ngIf="perPlan.ders">
+                <a [routerLink]="['/def-item', perPlan.ders?.id]">{{perPlan.ders?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'per-plan/'+ perPlan.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

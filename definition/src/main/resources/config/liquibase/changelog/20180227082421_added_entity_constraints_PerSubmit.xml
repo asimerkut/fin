@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity PerSubmit.
+    -->
+    <changeSet id="20180227082421-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="person_id"
+                                 baseTableName="per_submit"
+                                 constraintName="fk_per_submit_person_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="per_person"/>
+
+        <addForeignKeyConstraint baseColumnNames="ders_id"
+                                 baseTableName="per_submit"
+                                 constraintName="fk_per_submit_ders_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="def_item"/>
+
+        <addForeignKeyConstraint baseColumnNames="excuse_id"
+                                 baseTableName="per_submit"
+                                 constraintName="fk_per_submit_excuse_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="per_excuse"/>
+
+    </changeSet>
+</databaseChangeLog>

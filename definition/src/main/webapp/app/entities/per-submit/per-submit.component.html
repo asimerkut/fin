@@ -1,0 +1,95 @@
+<div>
+    <h2>
+        <span>Per Submits</span>
+        <button class="btn btn-primary float-right jh-create-entity create-per-submit" [routerLink]="['/', { outlets: { popup: ['per-submit-new'] } }]">
+            <span class="fa fa-plus"></span>
+            <span class="hidden-sm-down" >
+            Create new Per Submit
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <div class="row">
+        <div class="col-sm-12">
+            <form name="searchForm" class="form-inline">
+                <div class="input-group w-100 mt-3">
+                    <input type="text" class="form-control" [(ngModel)]="currentSearch" id="currentSearch" name="currentSearch" placeholder="Query">
+                    <button class="input-group-append btn btn-info" (click)="search(currentSearch)">
+                        <span class="fa fa-search"></span>
+                    </button>
+                    <button class="input-group-append btn btn-danger" (click)="clear()" *ngIf="currentSearch">
+                        <span class="fa fa-trash-o"></span>
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive" *ngIf="perSubmits">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span>ID</span></th>
+            <th><span>Submit Date</span></th>
+            <th><span>Ders Grup</span></th>
+            <th><span>Ders Sira</span></th>
+            <th><span>Ders Adet</span></th>
+            <th><span>Person</span></th>
+            <th><span>Ders</span></th>
+            <th><span>Excuse</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let perSubmit of perSubmits ;trackBy: trackId">
+                <td><a [routerLink]="['../per-submit', perSubmit.id ]">{{perSubmit.id}}</a></td>
+                <td>{{perSubmit.submitDate | date:'mediumDate'}}</td>
+                <td>{{perSubmit.dersGrup}}</td>
+                <td>{{perSubmit.dersSira}}</td>
+                <td>{{perSubmit.dersAdet}}</td>
+                <td>
+                    <div *ngIf="perSubmit.person">
+                        <a [routerLink]="['../per-person', perSubmit.person?.id ]" >{{perSubmit.person?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perSubmit.ders">
+                        <a [routerLink]="['../def-item', perSubmit.ders?.id ]" >{{perSubmit.ders?.code}}</a>
+                    </div>
+                </td>
+                <td>
+                    <div *ngIf="perSubmit.excuse">
+                        <a [routerLink]="['../per-excuse', perSubmit.excuse?.id ]" >{{perSubmit.excuse?.code}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['../per-submit', perSubmit.id ]"
+                                class="btn btn-info btn-sm">
+                            <span class="fa fa-eye"></span>
+                            <span class="d-none d-md-inline">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-submit/'+ perSubmit.id + '/edit'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-primary btn-sm">
+                            <span class="fa fa-pencil"></span>
+                            <span class="d-none d-md-inline">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'per-submit/'+ perSubmit.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <span class="fa fa-remove"></span>
+                            <span class="d-none d-md-inline">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

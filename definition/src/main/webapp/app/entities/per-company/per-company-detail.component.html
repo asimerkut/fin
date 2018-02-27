@@ -1,0 +1,54 @@
+
+<div *ngIf="perCompany">
+    <h2><span>Per Company</span> {{perCompany.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Code</span></dt>
+        <dd>
+            <span>{{perCompany.code}}</span>
+        </dd>
+        <dt><span>Name</span></dt>
+        <dd>
+            <span>{{perCompany.name}}</span>
+        </dd>
+        <dt><span>Mesai Oo</span></dt>
+        <dd>
+            <span>{{perCompany.mesaiOo}}</span>
+        </dd>
+        <dt><span>Mesai Os</span></dt>
+        <dd>
+            <span>{{perCompany.mesaiOs}}</span>
+        </dd>
+        <dt><span>Mesai Gc</span></dt>
+        <dd>
+            <span>{{perCompany.mesaiGc}}</span>
+        </dd>
+        <dt><span>Sehir</span></dt>
+        <dd>
+            <div *ngIf="perCompany.sehir">
+                <a [routerLink]="['/def-item', perCompany.sehir?.id]">{{perCompany.sehir?.code}}</a>
+            </div>
+        </dd>
+        <dt><span>Tipi</span></dt>
+        <dd>
+            <div *ngIf="perCompany.tipi">
+                <a [routerLink]="['/def-item', perCompany.tipi?.id]">{{perCompany.tipi?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'per-company/'+ perCompany.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>

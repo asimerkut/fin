@@ -1,0 +1,148 @@
+<form name="editForm" role="form" novalidate (ngSubmit)="save()" #editForm="ngForm">
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myPerPersonLabel">Create or edit a Per Person</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                (click)="clear()">&times;</button>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" [hidden]="!perPerson.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                   [(ngModel)]="perPerson.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_code">Code</label>
+            <input type="text" class="form-control" name="code" id="field_code"
+                [(ngModel)]="perPerson.code" required maxlength="20"/>
+            <div [hidden]="!(editForm.controls.code?.dirty && editForm.controls.code?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.code?.errors?.maxlength">
+                   This field cannot be longer than 20 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_name">Name</label>
+            <input type="text" class="form-control" name="name" id="field_name"
+                [(ngModel)]="perPerson.name" required maxlength="100"/>
+            <div [hidden]="!(editForm.controls.name?.dirty && editForm.controls.name?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.required">
+                   This field is required.
+                </small>
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.name?.errors?.maxlength">
+                   This field cannot be longer than 100 characters.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_isActive">Is Active</label>
+            <input type="checkbox" class="form-control" name="isActive" id="field_isActive"
+                [(ngModel)]="perPerson.isActive" />
+            <div [hidden]="!(editForm.controls.isActive?.dirty && editForm.controls.isActive?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.isActive?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_email">Email</label>
+            <input type="text" class="form-control" name="email" id="field_email"
+                [(ngModel)]="perPerson.email" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_phone">Phone</label>
+            <input type="text" class="form-control" name="phone" id="field_phone"
+                [(ngModel)]="perPerson.phone" />
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_cins">Cins</label>
+            <select class="form-control" name="cins" [(ngModel)]="perPerson.cins" id="field_cins" >
+                <option value="E">E</option>
+                <option value="K">K</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_medeni">Medeni</label>
+            <select class="form-control" name="medeni" [(ngModel)]="perPerson.medeni" id="field_medeni" >
+                <option value="BEK">BEK</option>
+                <option value="EVL">EVL</option>
+                <option value="DUL">DUL</option>
+                <option value="BOS">BOS</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label class="form-control-label" for="field_okul">Okul</label>
+            <select class="form-control" id="field_okul" name="okul" [(ngModel)]="perPerson.okul" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="perCompanyOption.id === perPerson.okul?.id ? perPerson.okul : perCompanyOption" *ngFor="let perCompanyOption of percompanies; trackBy: trackPerCompanyById">{{perCompanyOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_hizmt">Hizmt</label>
+            <select class="form-control" id="field_hizmt" name="hizmt" [(ngModel)]="perPerson.hizmt" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.hizmt?.id ? perPerson.hizmt : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_brans">Brans</label>
+            <select class="form-control" id="field_brans" name="brans" [(ngModel)]="perPerson.brans" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.brans?.id ? perPerson.brans : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_unvan">Unvan</label>
+            <select class="form-control" id="field_unvan" name="unvan" [(ngModel)]="perPerson.unvan" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.unvan?.id ? perPerson.unvan : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_kadro">Kadro</label>
+            <select class="form-control" id="field_kadro" name="kadro" [(ngModel)]="perPerson.kadro" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.kadro?.id ? perPerson.kadro : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_karyr">Karyr</label>
+            <select class="form-control" id="field_karyr" name="karyr" [(ngModel)]="perPerson.karyr" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.karyr?.id ? perPerson.karyr : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_konum">Konum</label>
+            <select class="form-control" id="field_konum" name="konum" [(ngModel)]="perPerson.konum" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="defItemOption.id === perPerson.konum?.id ? perPerson.konum : defItemOption" *ngFor="let defItemOption of defitems; trackBy: trackDefItemById">{{defItemOption.code}}</option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label class="form-control-label" for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" [(ngModel)]="perPerson.user" >
+                <option [ngValue]="null"></option>
+                <option [ngValue]="userOption.id === perPerson.user?.id ? perPerson.user : userOption" *ngFor="let userOption of users; trackBy: trackUserById">{{userOption.login}}</option>
+            </select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal" (click)="clear()">
+            <span class="fa fa-ban"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" [disabled]="editForm.form.invalid || isSaving" class="btn btn-primary">
+            <span class="fa fa-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

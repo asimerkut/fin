@@ -1,0 +1,48 @@
+
+<div *ngIf="perExcuse">
+    <h2><span>Per Excuse</span> {{perExcuse.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="row-md jh-entity-details">
+        <dt><span>Start Date</span></dt>
+        <dd>
+            <span>{{perExcuse.startDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Start Ders No</span></dt>
+        <dd>
+            <span>{{perExcuse.startDersNo}}</span>
+        </dd>
+        <dt><span>Finish Date</span></dt>
+        <dd>
+            <span>{{perExcuse.finishDate | date:'mediumDate'}}</span>
+        </dd>
+        <dt><span>Finish Ders No</span></dt>
+        <dd>
+            <span>{{perExcuse.finishDersNo}}</span>
+        </dd>
+        <dt><span>Is Excuse</span></dt>
+        <dd>
+            <span>{{perExcuse.isExcuse}}</span>
+        </dd>
+        <dt><span>Person</span></dt>
+        <dd>
+            <div *ngIf="perExcuse.person">
+                <a [routerLink]="['/per-person', perExcuse.person?.id]">{{perExcuse.person?.code}}</a>
+            </div>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            (click)="previousState()"
+            class="btn btn-info">
+        <span class="fa fa-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button"
+            [routerLink]="['/', { outlets: { popup: 'per-excuse/'+ perExcuse.id + '/edit'} }]"
+            replaceUrl="true"
+            queryParamsHandling="merge"
+            class="btn btn-primary">
+        <span class="fa fa-pencil"></span>&nbsp;<span> Edit</span>
+    </button>
+</div>
