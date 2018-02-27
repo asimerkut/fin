@@ -17,6 +17,7 @@ import { FinAdminModule } from './admin/admin.module';
 import { FinAccountModule } from './account/account.module';
 import { FinEntityModule } from './entities/entity.module';
 import { PaginationConfig } from './blocks/config/uib-pagination.config';
+import { FinprimengModule } from './primeng/primeng.module';
 // jhipster-needle-angular-add-module-import JHipster will add new module here
 import {
     JhiMainComponent,
@@ -37,6 +38,7 @@ import {
         FinAdminModule,
         FinAccountModule,
         FinEntityModule,
+        FinprimengModule,
         // jhipster-needle-angular-add-module JHipster will add new module here
     ],
     declarations: [
