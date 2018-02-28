@@ -61,20 +61,20 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="form-control-label" for="field_dersNo">Ders No</label>
-            <input type="number" class="form-control" name="dersNo" id="field_dersNo"
-                [(ngModel)]="perPlan.dersNo" required max="15"/>
-            <div [hidden]="!(editForm.controls.dersNo?.dirty && editForm.controls.dersNo?.invalid)">
+            <label class="form-control-label" for="field_dersSira">Ders Sira</label>
+            <input type="number" class="form-control" name="dersSira" id="field_dersSira"
+                [(ngModel)]="perPlan.dersSira" required max="15"/>
+            <div [hidden]="!(editForm.controls.dersSira?.dirty && editForm.controls.dersSira?.invalid)">
                 <small class="form-text text-danger"
-                   [hidden]="!editForm.controls.dersNo?.errors?.required">
+                   [hidden]="!editForm.controls.dersSira?.errors?.required">
                    This field is required.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.dersNo?.errors?.max">
+                    [hidden]="!editForm.controls.dersSira?.errors?.max">
                     This field cannot be more than 15.
                 </small>
                 <small class="form-text text-danger"
-                    [hidden]="!editForm.controls.dersNo?.errors?.number">
+                    [hidden]="!editForm.controls.dersSira?.errors?.number">
                     This field should be a number.
                 </small>
             </div>

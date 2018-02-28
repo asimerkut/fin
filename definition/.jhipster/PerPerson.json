@@ -77,6 +77,14 @@
             ]
         },
         {
+            "fieldName": "sozlesme",
+            "fieldType": "EnmSozlesme",
+            "fieldValues": "KADRO,SOZ4B,UCRET",
+            "fieldValidateRules": [
+                "required"
+            ]
+        },
+        {
             "fieldName": "email",
             "fieldType": "String"
         },

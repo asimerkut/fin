@@ -62,6 +62,7 @@ entity PerPerson {
     code String required maxlength(20),
     name String required maxlength(100),
     isActive Boolean required,
+    sozlesme EnmSozlesme required,
     email String,
     phone String,
     cins  EnmCins,
@@ -72,7 +73,7 @@ entity PerPlan {
     startDate LocalDate required,
     dayNo EnmDay required,
     dersGrup EnmDersGrup required,
-    dersNo Integer required max(15),
+    dersSira Integer required max(15),
     dersAdet Integer required max(15)
 }
 
@@ -120,5 +121,6 @@ enum EnmDay {D1,D2,D3,D4,D5,D6,D7}
 enum EnmCins {E,K}
 enum EnmMedeni {BEK,EVL,DUL,BOS}
 enum EnmDersGrup {D_GS,GG,GY}
+enum EnmSozlesme {KADRO,SOZ4B,UCRET}
 
 service all with serviceImpl

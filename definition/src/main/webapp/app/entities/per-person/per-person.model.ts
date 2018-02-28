@@ -1,5 +1,11 @@
 import { BaseEntity, User } from './../../shared';
 
+export const enum EnmSozlesme {
+    'KADRO',
+    'SOZ4B',
+    'UCRET'
+}
+
 export const enum EnmCins {
     'E',
     'K'
@@ -18,6 +24,7 @@ export class PerPerson implements BaseEntity {
         public code?: string,
         public name?: string,
         public isActive?: boolean,
+        public sozlesme?: EnmSozlesme,
         public email?: string,
         public phone?: string,
         public cins?: EnmCins,

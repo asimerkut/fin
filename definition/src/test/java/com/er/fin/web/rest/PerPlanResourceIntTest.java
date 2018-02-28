@@ -55,8 +55,8 @@ public class PerPlanResourceIntTest {
     private static final EnmDersGrup DEFAULT_DERS_GRUP = EnmDersGrup.D_GS;
     private static final EnmDersGrup UPDATED_DERS_GRUP = EnmDersGrup.GG;
 
-    private static final Integer DEFAULT_DERS_NO = 15;
-    private static final Integer UPDATED_DERS_NO = 14;
+    private static final Integer DEFAULT_DERS_SIRA = 15;
+    private static final Integer UPDATED_DERS_SIRA = 14;
 
     private static final Integer DEFAULT_DERS_ADET = 15;
     private static final Integer UPDATED_DERS_ADET = 14;
@@ -108,7 +108,7 @@ public class PerPlanResourceIntTest {
             .startDate(DEFAULT_START_DATE)
             .dayNo(DEFAULT_DAY_NO)
             .dersGrup(DEFAULT_DERS_GRUP)
-            .dersNo(DEFAULT_DERS_NO)
+            .dersSira(DEFAULT_DERS_SIRA)
             .dersAdet(DEFAULT_DERS_ADET);
         // Add required entity
         PerPerson person = PerPersonResourceIntTest.createEntity(em);
@@ -147,7 +147,7 @@ public class PerPlanResourceIntTest {
         assertThat(testPerPlan.getStartDate()).isEqualTo(DEFAULT_START_DATE);
         assertThat(testPerPlan.getDayNo()).isEqualTo(DEFAULT_DAY_NO);
         assertThat(testPerPlan.getDersGrup()).isEqualTo(DEFAULT_DERS_GRUP);
-        assertThat(testPerPlan.getDersNo()).isEqualTo(DEFAULT_DERS_NO);
+        assertThat(testPerPlan.getDersSira()).isEqualTo(DEFAULT_DERS_SIRA);
         assertThat(testPerPlan.getDersAdet()).isEqualTo(DEFAULT_DERS_ADET);
 
         // Validate the PerPlan in Elasticsearch
@@ -230,10 +230,10 @@ public class PerPlanResourceIntTest {
 
     @Test
     @Transactional
-    public void checkDersNoIsRequired() throws Exception {
+    public void checkDersSiraIsRequired() throws Exception {
         int databaseSizeBeforeTest = perPlanRepository.findAll().size();
         // set the field null
-        perPlan.setDersNo(null);
+        perPlan.setDersSira(null);
 
         // Create the PerPlan, which fails.
 
@@ -278,7 +278,7 @@ public class PerPlanResourceIntTest {
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].dayNo").value(hasItem(DEFAULT_DAY_NO.toString())))
             .andExpect(jsonPath("$.[*].dersGrup").value(hasItem(DEFAULT_DERS_GRUP.toString())))
-            .andExpect(jsonPath("$.[*].dersNo").value(hasItem(DEFAULT_DERS_NO)))
+            .andExpect(jsonPath("$.[*].dersSira").value(hasItem(DEFAULT_DERS_SIRA)))
             .andExpect(jsonPath("$.[*].dersAdet").value(hasItem(DEFAULT_DERS_ADET)));
     }
 
@@ -296,7 +296,7 @@ public class PerPlanResourceIntTest {
             .andExpect(jsonPath("$.startDate").value(DEFAULT_START_DATE.toString()))
             .andExpect(jsonPath("$.dayNo").value(DEFAULT_DAY_NO.toString()))
             .andExpect(jsonPath("$.dersGrup").value(DEFAULT_DERS_GRUP.toString()))
-            .andExpect(jsonPath("$.dersNo").value(DEFAULT_DERS_NO))
+            .andExpect(jsonPath("$.dersSira").value(DEFAULT_DERS_SIRA))
             .andExpect(jsonPath("$.dersAdet").value(DEFAULT_DERS_ADET));
     }
 
@@ -324,7 +324,7 @@ public class PerPlanResourceIntTest {
             .startDate(UPDATED_START_DATE)
             .dayNo(UPDATED_DAY_NO)
             .dersGrup(UPDATED_DERS_GRUP)
-            .dersNo(UPDATED_DERS_NO)
+            .dersSira(UPDATED_DERS_SIRA)
             .dersAdet(UPDATED_DERS_ADET);
 
         restPerPlanMockMvc.perform(put("/api/per-plans")
@@ -339,7 +339,7 @@ public class PerPlanResourceIntTest {
         assertThat(testPerPlan.getStartDate()).isEqualTo(UPDATED_START_DATE);
         assertThat(testPerPlan.getDayNo()).isEqualTo(UPDATED_DAY_NO);
         assertThat(testPerPlan.getDersGrup()).isEqualTo(UPDATED_DERS_GRUP);
-        assertThat(testPerPlan.getDersNo()).isEqualTo(UPDATED_DERS_NO);
+        assertThat(testPerPlan.getDersSira()).isEqualTo(UPDATED_DERS_SIRA);
         assertThat(testPerPlan.getDersAdet()).isEqualTo(UPDATED_DERS_ADET);
 
         // Validate the PerPlan in Elasticsearch
@@ -401,7 +401,7 @@ public class PerPlanResourceIntTest {
             .andExpect(jsonPath("$.[*].startDate").value(hasItem(DEFAULT_START_DATE.toString())))
             .andExpect(jsonPath("$.[*].dayNo").value(hasItem(DEFAULT_DAY_NO.toString())))
             .andExpect(jsonPath("$.[*].dersGrup").value(hasItem(DEFAULT_DERS_GRUP.toString())))
-            .andExpect(jsonPath("$.[*].dersNo").value(hasItem(DEFAULT_DERS_NO)))
+            .andExpect(jsonPath("$.[*].dersSira").value(hasItem(DEFAULT_DERS_SIRA)))
             .andExpect(jsonPath("$.[*].dersAdet").value(hasItem(DEFAULT_DERS_ADET)));
     }
 

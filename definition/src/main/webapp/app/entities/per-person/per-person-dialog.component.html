@@ -54,6 +54,20 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="form-control-label" for="field_sozlesme">Sozlesme</label>
+            <select class="form-control" name="sozlesme" [(ngModel)]="perPerson.sozlesme" id="field_sozlesme"  required>
+                <option value="KADRO">KADRO</option>
+                <option value="SOZ4B">SOZ4B</option>
+                <option value="UCRET">UCRET</option>
+            </select>
+            <div [hidden]="!(editForm.controls.sozlesme?.dirty && editForm.controls.sozlesme?.invalid)">
+                <small class="form-text text-danger"
+                   [hidden]="!editForm.controls.sozlesme?.errors?.required">
+                   This field is required.
+                </small>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="form-control-label" for="field_email">Email</label>
             <input type="text" class="form-control" name="email" id="field_email"
                 [(ngModel)]="perPerson.email" />

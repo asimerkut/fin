@@ -112,4 +112,12 @@ public class DefRelation implements Serializable {
             ", parameter='" + getParameter() + "'" +
             "}";
     }
+
+    public String getCode(){
+        return this.typeSource.getCode()+":"+
+            (this.typeTarget==null?"?":this.typeTarget.getCode())+":"+
+                (this.parameter==null?"?":this.parameter.name());
+
+    }
+
 }

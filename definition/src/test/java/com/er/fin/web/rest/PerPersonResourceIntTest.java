@@ -31,6 +31,7 @@ import static org.hamcrest.Matchers.hasItem;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
 
+import com.er.fin.domain.enumeration.EnmSozlesme;
 import com.er.fin.domain.enumeration.EnmCins;
 import com.er.fin.domain.enumeration.EnmMedeni;
 /**
@@ -50,6 +51,9 @@ public class PerPersonResourceIntTest {
 
     private static final Boolean DEFAULT_IS_ACTIVE = false;
     private static final Boolean UPDATED_IS_ACTIVE = true;
+
+    private static final EnmSozlesme DEFAULT_SOZLESME = EnmSozlesme.KADRO;
+    private static final EnmSozlesme UPDATED_SOZLESME = EnmSozlesme.SOZ4B;
 
     private static final String DEFAULT_EMAIL = "AAAAAAAAAA";
     private static final String UPDATED_EMAIL = "BBBBBBBBBB";
@@ -110,6 +114,7 @@ public class PerPersonResourceIntTest {
             .code(DEFAULT_CODE)
             .name(DEFAULT_NAME)
             .isActive(DEFAULT_IS_ACTIVE)
+            .sozlesme(DEFAULT_SOZLESME)
             .email(DEFAULT_EMAIL)
             .phone(DEFAULT_PHONE)
             .cins(DEFAULT_CINS)
@@ -141,6 +146,7 @@ public class PerPersonResourceIntTest {
         assertThat(testPerPerson.getCode()).isEqualTo(DEFAULT_CODE);
         assertThat(testPerPerson.getName()).isEqualTo(DEFAULT_NAME);
         assertThat(testPerPerson.isIsActive()).isEqualTo(DEFAULT_IS_ACTIVE);
+        assertThat(testPerPerson.getSozlesme()).isEqualTo(DEFAULT_SOZLESME);
         assertThat(testPerPerson.getEmail()).isEqualTo(DEFAULT_EMAIL);
         assertThat(testPerPerson.getPhone()).isEqualTo(DEFAULT_PHONE);
         assertThat(testPerPerson.getCins()).isEqualTo(DEFAULT_CINS);
@@ -226,6 +232,24 @@ public class PerPersonResourceIntTest {
 
     @Test
     @Transactional
+    public void checkSozlesmeIsRequired() throws Exception {
+        int databaseSizeBeforeTest = perPersonRepository.findAll().size();
+        // set the field null
+        perPerson.setSozlesme(null);
+
+        // Create the PerPerson, which fails.
+
+        restPerPersonMockMvc.perform(post("/api/per-people")
+            .contentType(TestUtil.APPLICATION_JSON_UTF8)
+            .content(TestUtil.convertObjectToJsonBytes(perPerson)))
+            .andExpect(status().isBadRequest());
+
+        List<PerPerson> perPersonList = perPersonRepository.findAll();
+        assertThat(perPersonList).hasSize(databaseSizeBeforeTest);
+    }
+
+    @Test
+    @Transactional
     public void getAllPerPeople() throws Exception {
         // Initialize the database
         perPersonRepository.saveAndFlush(perPerson);
@@ -238,6 +262,7 @@ public class PerPersonResourceIntTest {
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].sozlesme").value(hasItem(DEFAULT_SOZLESME.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
             .andExpect(jsonPath("$.[*].cins").value(hasItem(DEFAULT_CINS.toString())))
@@ -258,6 +283,7 @@ public class PerPersonResourceIntTest {
             .andExpect(jsonPath("$.code").value(DEFAULT_CODE.toString()))
             .andExpect(jsonPath("$.name").value(DEFAULT_NAME.toString()))
             .andExpect(jsonPath("$.isActive").value(DEFAULT_IS_ACTIVE.booleanValue()))
+            .andExpect(jsonPath("$.sozlesme").value(DEFAULT_SOZLESME.toString()))
             .andExpect(jsonPath("$.email").value(DEFAULT_EMAIL.toString()))
             .andExpect(jsonPath("$.phone").value(DEFAULT_PHONE.toString()))
             .andExpect(jsonPath("$.cins").value(DEFAULT_CINS.toString()))
@@ -288,6 +314,7 @@ public class PerPersonResourceIntTest {
             .code(UPDATED_CODE)
             .name(UPDATED_NAME)
             .isActive(UPDATED_IS_ACTIVE)
+            .sozlesme(UPDATED_SOZLESME)
             .email(UPDATED_EMAIL)
             .phone(UPDATED_PHONE)
             .cins(UPDATED_CINS)
@@ -305,6 +332,7 @@ public class PerPersonResourceIntTest {
         assertThat(testPerPerson.getCode()).isEqualTo(UPDATED_CODE);
         assertThat(testPerPerson.getName()).isEqualTo(UPDATED_NAME);
         assertThat(testPerPerson.isIsActive()).isEqualTo(UPDATED_IS_ACTIVE);
+        assertThat(testPerPerson.getSozlesme()).isEqualTo(UPDATED_SOZLESME);
         assertThat(testPerPerson.getEmail()).isEqualTo(UPDATED_EMAIL);
         assertThat(testPerPerson.getPhone()).isEqualTo(UPDATED_PHONE);
         assertThat(testPerPerson.getCins()).isEqualTo(UPDATED_CINS);
@@ -369,6 +397,7 @@ public class PerPersonResourceIntTest {
             .andExpect(jsonPath("$.[*].code").value(hasItem(DEFAULT_CODE.toString())))
             .andExpect(jsonPath("$.[*].name").value(hasItem(DEFAULT_NAME.toString())))
             .andExpect(jsonPath("$.[*].isActive").value(hasItem(DEFAULT_IS_ACTIVE.booleanValue())))
+            .andExpect(jsonPath("$.[*].sozlesme").value(hasItem(DEFAULT_SOZLESME.toString())))
             .andExpect(jsonPath("$.[*].email").value(hasItem(DEFAULT_EMAIL.toString())))
             .andExpect(jsonPath("$.[*].phone").value(hasItem(DEFAULT_PHONE.toString())))
             .andExpect(jsonPath("$.[*].cins").value(hasItem(DEFAULT_CINS.toString())))

@@ -22,7 +22,7 @@ export class PerPlan implements BaseEntity {
         public startDate?: any,
         public dayNo?: EnmDay,
         public dersGrup?: EnmDersGrup,
-        public dersNo?: number,
+        public dersSira?: number,
         public dersAdet?: number,
         public person?: BaseEntity,
         public ders?: BaseEntity,

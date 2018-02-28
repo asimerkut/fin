@@ -33,6 +33,10 @@
                 <constraints nullable="false" />
             </column>
 
+            <column name="sozlesme" type="varchar(255)">
+                <constraints nullable="false" />
+            </column>
+
             <column name="email" type="varchar(255)">
                 <constraints nullable="true" />
             </column>

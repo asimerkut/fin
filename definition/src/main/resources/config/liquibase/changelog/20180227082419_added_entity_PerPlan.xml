@@ -33,7 +33,7 @@
                 <constraints nullable="false" />
             </column>
 
-            <column name="ders_no" type="integer">
+            <column name="ders_sira" type="integer">
                 <constraints nullable="false" />
             </column>
 

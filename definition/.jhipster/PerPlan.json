@@ -41,7 +41,7 @@
             ]
         },
         {
-            "fieldName": "dersNo",
+            "fieldName": "dersSira",
             "fieldType": "Integer",
             "fieldValidateRules": [
                 "required",

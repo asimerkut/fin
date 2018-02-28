@@ -8,6 +8,8 @@ import org.springframework.data.elasticsearch.annotations.Document;
 import java.io.Serializable;
 import java.util.Objects;
 
+import com.er.fin.domain.enumeration.EnmSozlesme;
+
 import com.er.fin.domain.enumeration.EnmCins;
 
 import com.er.fin.domain.enumeration.EnmMedeni;
@@ -40,6 +42,11 @@ public class PerPerson implements Serializable {
     @NotNull
     @Column(name = "is_active", nullable = false)
     private Boolean isActive;
+
+    @NotNull
+    @Enumerated(EnumType.STRING)
+    @Column(name = "sozlesme", nullable = false)
+    private EnmSozlesme sozlesme;
 
     @Column(name = "email")
     private String email;
@@ -125,6 +132,19 @@ public class PerPerson implements Serializable {
 
     public void setIsActive(Boolean isActive) {
         this.isActive = isActive;
+    }
+
+    public EnmSozlesme getSozlesme() {
+        return sozlesme;
+    }
+
+    public PerPerson sozlesme(EnmSozlesme sozlesme) {
+        this.sozlesme = sozlesme;
+        return this;
+    }
+
+    public void setSozlesme(EnmSozlesme sozlesme) {
+        this.sozlesme = sozlesme;
     }
 
     public String getEmail() {
@@ -311,6 +331,7 @@ public class PerPerson implements Serializable {
             ", code='" + getCode() + "'" +
             ", name='" + getName() + "'" +
             ", isActive='" + isIsActive() + "'" +
+            ", sozlesme='" + getSozlesme() + "'" +
             ", email='" + getEmail() + "'" +
             ", phone='" + getPhone() + "'" +
             ", cins='" + getCins() + "'" +

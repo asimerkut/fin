@@ -44,8 +44,8 @@ public class PerPlan implements Serializable {
 
     @NotNull
     @Max(value = 15)
-    @Column(name = "ders_no", nullable = false)
-    private Integer dersNo;
+    @Column(name = "ders_sira", nullable = false)
+    private Integer dersSira;
 
     @NotNull
     @Max(value = 15)
@@ -108,17 +108,17 @@ public class PerPlan implements Serializable {
         this.dersGrup = dersGrup;
     }
 
-    public Integer getDersNo() {
-        return dersNo;
+    public Integer getDersSira() {
+        return dersSira;
     }
 
-    public PerPlan dersNo(Integer dersNo) {
-        this.dersNo = dersNo;
+    public PerPlan dersSira(Integer dersSira) {
+        this.dersSira = dersSira;
         return this;
     }
 
-    public void setDersNo(Integer dersNo) {
-        this.dersNo = dersNo;
+    public void setDersSira(Integer dersSira) {
+        this.dersSira = dersSira;
     }
 
     public Integer getDersAdet() {
@@ -188,7 +188,7 @@ public class PerPlan implements Serializable {
             ", startDate='" + getStartDate() + "'" +
             ", dayNo='" + getDayNo() + "'" +
             ", dersGrup='" + getDersGrup() + "'" +
-            ", dersNo=" + getDersNo() +
+            ", dersSira=" + getDersSira() +
             ", dersAdet=" + getDersAdet() +
             "}";
     }

@@ -3,7 +3,7 @@ npm install jquery-ui -S
 npm install -D @types/jquery
 npm install pivottable
 
-jhipster import-jdl jdl-pivot.jh
+jhipster import-jdl jdl-persim.jh
 npm install -g generator-jhipster-entity-audit
 yo jhipster-entity-audit default
 
