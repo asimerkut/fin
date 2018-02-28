@@ -1,9 +1,0 @@
-entity DefPivot {
-    code String,
-    pvtSql TextBlob,
-    pvtVal String,
-    pvtCol String,
-    pvtRow String
-}
-
-service all with serviceImpl
